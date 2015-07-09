@@ -14,6 +14,38 @@
 		5AE467181B4E175400957C31 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467171B4E175400957C31 /* Images.xcassets */; };
 		5AE4671B1B4E175400957C31 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467191B4E175400957C31 /* LaunchScreen.xib */; };
 		5AE467271B4E175400957C31 /* JsonReciprocityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467261B4E175400957C31 /* JsonReciprocityTests.m */; };
+		5AE4673A1B4E177200957C31 /* JsonDeserializstion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467321B4E177200957C31 /* JsonDeserializstion.m */; };
+		5AE4673B1B4E177200957C31 /* JsonSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467351B4E177200957C31 /* JsonSerialization.m */; };
+		5AE4673C1B4E177200957C31 /* NSMutableDictionary+SafeSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467371B4E177200957C31 /* NSMutableDictionary+SafeSet.m */; };
+		5AE4673D1B4E177200957C31 /* NSObject+JsonReciprocity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467391B4E177200957C31 /* NSObject+JsonReciprocity.m */; };
+		5AE467451B4E177700957C31 /* CarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467401B4E177700957C31 /* CarModel.m */; };
+		5AE467461B4E177700957C31 /* HouseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467421B4E177700957C31 /* HouseModel.m */; };
+		5AE467471B4E177700957C31 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467441B4E177700957C31 /* PersonModel.m */; };
+		5AE4675F1B4E179700957C31 /* ComplexStructureTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467481B4E179700957C31 /* ComplexStructureTest.m */; };
+		5AE467601B4E179700957C31 /* ExchangeEachTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467491B4E179700957C31 /* ExchangeEachTests.m */; };
+		5AE467611B4E179700957C31 /* IrregularTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4674A1B4E179700957C31 /* IrregularTest.m */; };
+		5AE467621B4E179700957C31 /* JsonSerializationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4674B1B4E179700957C31 /* JsonSerializationTest.m */; };
+		5AE467631B4E179700957C31 /* ObjectSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4674C1B4E179700957C31 /* ObjectSerialization.m */; };
+		5AE467641B4E179700957C31 /* SimpleTypeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4674D1B4E179700957C31 /* SimpleTypeTest.m */; };
+		5AE467651B4E179700957C31 /* CarJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467501B4E179700957C31 /* CarJsonModel.m */; };
+		5AE467661B4E179700957C31 /* CarMTLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467521B4E179700957C31 /* CarMTLModel.m */; };
+		5AE467671B4E179700957C31 /* HouseJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467541B4E179700957C31 /* HouseJsonModel.m */; };
+		5AE467681B4E179700957C31 /* HouseMTLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467561B4E179700957C31 /* HouseMTLModel.m */; };
+		5AE467691B4E179700957C31 /* IrregularTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467581B4E179700957C31 /* IrregularTestModel.m */; };
+		5AE4676A1B4E179700957C31 /* PersonJsonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4675A1B4E179700957C31 /* PersonJsonModel.m */; };
+		5AE4676B1B4E179700957C31 /* PersonMTLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4675C1B4E179700957C31 /* PersonMTLModel.m */; };
+		5AE4676C1B4E179700957C31 /* SimpleTypeTestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4675E1B4E179700957C31 /* SimpleTypeTestModel.m */; };
+		5AE467731B4E17A200957C31 /* complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE4676E1B4E17A200957C31 /* complex.json */; };
+		5AE467741B4E17A200957C31 /* complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE4676E1B4E17A200957C31 /* complex.json */; };
+		5AE467751B4E17A200957C31 /* irregular_key.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE4676F1B4E17A200957C31 /* irregular_key.json */; };
+		5AE467761B4E17A200957C31 /* irregular_key.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE4676F1B4E17A200957C31 /* irregular_key.json */; };
+		5AE467771B4E17A200957C31 /* multi_complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467701B4E17A200957C31 /* multi_complex.json */; };
+		5AE467781B4E17A200957C31 /* multi_complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467701B4E17A200957C31 /* multi_complex.json */; };
+		5AE467791B4E17A200957C31 /* simple_type.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467711B4E17A200957C31 /* simple_type.json */; };
+		5AE4677A1B4E17A200957C31 /* simple_type.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467711B4E17A200957C31 /* simple_type.json */; };
+		5AE4677B1B4E17A200957C31 /* single_complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467721B4E17A200957C31 /* single_complex.json */; };
+		5AE4677C1B4E17A200957C31 /* single_complex.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AE467721B4E17A200957C31 /* single_complex.json */; };
+		7107C684217431DCFB50A3AF /* libPods-JsonReciprocityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD5CCFBA0116482AB864FC /* libPods-JsonReciprocityTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +72,51 @@
 		5AE467201B4E175400957C31 /* JsonReciprocityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JsonReciprocityTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE467251B4E175400957C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AE467261B4E175400957C31 /* JsonReciprocityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JsonReciprocityTests.m; sourceTree = "<group>"; };
+		5AE467311B4E177200957C31 /* JsonDeserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonDeserialization.h; sourceTree = "<group>"; };
+		5AE467321B4E177200957C31 /* JsonDeserializstion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonDeserializstion.m; sourceTree = "<group>"; };
+		5AE467331B4E177200957C31 /* JsonReciprocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonReciprocity.h; sourceTree = "<group>"; };
+		5AE467341B4E177200957C31 /* JsonSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonSerialization.h; sourceTree = "<group>"; };
+		5AE467351B4E177200957C31 /* JsonSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonSerialization.m; sourceTree = "<group>"; };
+		5AE467361B4E177200957C31 /* NSMutableDictionary+SafeSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSet.h"; sourceTree = "<group>"; };
+		5AE467371B4E177200957C31 /* NSMutableDictionary+SafeSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSet.m"; sourceTree = "<group>"; };
+		5AE467381B4E177200957C31 /* NSObject+JsonReciprocity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JsonReciprocity.h"; sourceTree = "<group>"; };
+		5AE467391B4E177200957C31 /* NSObject+JsonReciprocity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JsonReciprocity.m"; sourceTree = "<group>"; };
+		5AE4673F1B4E177700957C31 /* CarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarModel.h; sourceTree = "<group>"; };
+		5AE467401B4E177700957C31 /* CarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarModel.m; sourceTree = "<group>"; };
+		5AE467411B4E177700957C31 /* HouseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseModel.h; sourceTree = "<group>"; };
+		5AE467421B4E177700957C31 /* HouseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseModel.m; sourceTree = "<group>"; };
+		5AE467431B4E177700957C31 /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		5AE467441B4E177700957C31 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
+		5AE467481B4E179700957C31 /* ComplexStructureTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplexStructureTest.m; sourceTree = "<group>"; };
+		5AE467491B4E179700957C31 /* ExchangeEachTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExchangeEachTests.m; sourceTree = "<group>"; };
+		5AE4674A1B4E179700957C31 /* IrregularTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IrregularTest.m; sourceTree = "<group>"; };
+		5AE4674B1B4E179700957C31 /* JsonSerializationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonSerializationTest.m; sourceTree = "<group>"; };
+		5AE4674C1B4E179700957C31 /* ObjectSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectSerialization.m; sourceTree = "<group>"; };
+		5AE4674D1B4E179700957C31 /* SimpleTypeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTypeTest.m; sourceTree = "<group>"; };
+		5AE4674F1B4E179700957C31 /* CarJsonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarJsonModel.h; sourceTree = "<group>"; };
+		5AE467501B4E179700957C31 /* CarJsonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarJsonModel.m; sourceTree = "<group>"; };
+		5AE467511B4E179700957C31 /* CarMTLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarMTLModel.h; sourceTree = "<group>"; };
+		5AE467521B4E179700957C31 /* CarMTLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarMTLModel.m; sourceTree = "<group>"; };
+		5AE467531B4E179700957C31 /* HouseJsonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseJsonModel.h; sourceTree = "<group>"; };
+		5AE467541B4E179700957C31 /* HouseJsonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseJsonModel.m; sourceTree = "<group>"; };
+		5AE467551B4E179700957C31 /* HouseMTLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HouseMTLModel.h; sourceTree = "<group>"; };
+		5AE467561B4E179700957C31 /* HouseMTLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HouseMTLModel.m; sourceTree = "<group>"; };
+		5AE467571B4E179700957C31 /* IrregularTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IrregularTestModel.h; sourceTree = "<group>"; };
+		5AE467581B4E179700957C31 /* IrregularTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IrregularTestModel.m; sourceTree = "<group>"; };
+		5AE467591B4E179700957C31 /* PersonJsonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonJsonModel.h; sourceTree = "<group>"; };
+		5AE4675A1B4E179700957C31 /* PersonJsonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonJsonModel.m; sourceTree = "<group>"; };
+		5AE4675B1B4E179700957C31 /* PersonMTLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonMTLModel.h; sourceTree = "<group>"; };
+		5AE4675C1B4E179700957C31 /* PersonMTLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonMTLModel.m; sourceTree = "<group>"; };
+		5AE4675D1B4E179700957C31 /* SimpleTypeTestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTypeTestModel.h; sourceTree = "<group>"; };
+		5AE4675E1B4E179700957C31 /* SimpleTypeTestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTypeTestModel.m; sourceTree = "<group>"; };
+		5AE4676E1B4E17A200957C31 /* complex.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = complex.json; sourceTree = "<group>"; };
+		5AE4676F1B4E17A200957C31 /* irregular_key.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = irregular_key.json; sourceTree = "<group>"; };
+		5AE467701B4E17A200957C31 /* multi_complex.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = multi_complex.json; sourceTree = "<group>"; };
+		5AE467711B4E17A200957C31 /* simple_type.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = simple_type.json; sourceTree = "<group>"; };
+		5AE467721B4E17A200957C31 /* single_complex.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = single_complex.json; sourceTree = "<group>"; };
+		6F72276313C23B4CF8F8F2F0 /* Pods-JsonReciprocityTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JsonReciprocityTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JsonReciprocityTests/Pods-JsonReciprocityTests.debug.xcconfig"; sourceTree = "<group>"; };
+		79BD5CCFBA0116482AB864FC /* libPods-JsonReciprocityTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JsonReciprocityTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B177AFAFFEC0772B471A0E27 /* Pods-JsonReciprocityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JsonReciprocityTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JsonReciprocityTests/Pods-JsonReciprocityTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,18 +131,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7107C684217431DCFB50A3AF /* libPods-JsonReciprocityTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		331DF47F07C5C165C8306629 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F72276313C23B4CF8F8F2F0 /* Pods-JsonReciprocityTests.debug.xcconfig */,
+				B177AFAFFEC0772B471A0E27 /* Pods-JsonReciprocityTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5AE466FE1B4E175400957C31 = {
 			isa = PBXGroup;
 			children = (
 				5AE467091B4E175400957C31 /* JsonReciprocity */,
 				5AE467231B4E175400957C31 /* JsonReciprocityTests */,
 				5AE467081B4E175400957C31 /* Products */,
+				331DF47F07C5C165C8306629 /* Pods */,
+				E9458CCF042A151BD8996291 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +170,8 @@
 		5AE467091B4E175400957C31 /* JsonReciprocity */ = {
 			isa = PBXGroup;
 			children = (
+				5AE4673E1B4E177700957C31 /* Model */,
+				5AE467301B4E177200957C31 /* JsonReciprocity */,
 				5AE4670E1B4E175400957C31 /* AppDelegate.h */,
 				5AE4670F1B4E175400957C31 /* AppDelegate.m */,
 				5AE467111B4E175400957C31 /* ViewController.h */,
@@ -105,6 +196,14 @@
 		5AE467231B4E175400957C31 /* JsonReciprocityTests */ = {
 			isa = PBXGroup;
 			children = (
+				5AE4674E1B4E179700957C31 /* TestModels */,
+				5AE4676D1B4E17A200957C31 /* JsonFile */,
+				5AE467481B4E179700957C31 /* ComplexStructureTest.m */,
+				5AE467491B4E179700957C31 /* ExchangeEachTests.m */,
+				5AE4674A1B4E179700957C31 /* IrregularTest.m */,
+				5AE4674B1B4E179700957C31 /* JsonSerializationTest.m */,
+				5AE4674C1B4E179700957C31 /* ObjectSerialization.m */,
+				5AE4674D1B4E179700957C31 /* SimpleTypeTest.m */,
 				5AE467261B4E175400957C31 /* JsonReciprocityTests.m */,
 				5AE467241B4E175400957C31 /* Supporting Files */,
 			);
@@ -117,6 +216,78 @@
 				5AE467251B4E175400957C31 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5AE467301B4E177200957C31 /* JsonReciprocity */ = {
+			isa = PBXGroup;
+			children = (
+				5AE467311B4E177200957C31 /* JsonDeserialization.h */,
+				5AE467321B4E177200957C31 /* JsonDeserializstion.m */,
+				5AE467331B4E177200957C31 /* JsonReciprocity.h */,
+				5AE467341B4E177200957C31 /* JsonSerialization.h */,
+				5AE467351B4E177200957C31 /* JsonSerialization.m */,
+				5AE467361B4E177200957C31 /* NSMutableDictionary+SafeSet.h */,
+				5AE467371B4E177200957C31 /* NSMutableDictionary+SafeSet.m */,
+				5AE467381B4E177200957C31 /* NSObject+JsonReciprocity.h */,
+				5AE467391B4E177200957C31 /* NSObject+JsonReciprocity.m */,
+			);
+			path = JsonReciprocity;
+			sourceTree = "<group>";
+		};
+		5AE4673E1B4E177700957C31 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5AE4673F1B4E177700957C31 /* CarModel.h */,
+				5AE467401B4E177700957C31 /* CarModel.m */,
+				5AE467411B4E177700957C31 /* HouseModel.h */,
+				5AE467421B4E177700957C31 /* HouseModel.m */,
+				5AE467431B4E177700957C31 /* PersonModel.h */,
+				5AE467441B4E177700957C31 /* PersonModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5AE4674E1B4E179700957C31 /* TestModels */ = {
+			isa = PBXGroup;
+			children = (
+				5AE4674F1B4E179700957C31 /* CarJsonModel.h */,
+				5AE467501B4E179700957C31 /* CarJsonModel.m */,
+				5AE467511B4E179700957C31 /* CarMTLModel.h */,
+				5AE467521B4E179700957C31 /* CarMTLModel.m */,
+				5AE467531B4E179700957C31 /* HouseJsonModel.h */,
+				5AE467541B4E179700957C31 /* HouseJsonModel.m */,
+				5AE467551B4E179700957C31 /* HouseMTLModel.h */,
+				5AE467561B4E179700957C31 /* HouseMTLModel.m */,
+				5AE467571B4E179700957C31 /* IrregularTestModel.h */,
+				5AE467581B4E179700957C31 /* IrregularTestModel.m */,
+				5AE467591B4E179700957C31 /* PersonJsonModel.h */,
+				5AE4675A1B4E179700957C31 /* PersonJsonModel.m */,
+				5AE4675B1B4E179700957C31 /* PersonMTLModel.h */,
+				5AE4675C1B4E179700957C31 /* PersonMTLModel.m */,
+				5AE4675D1B4E179700957C31 /* SimpleTypeTestModel.h */,
+				5AE4675E1B4E179700957C31 /* SimpleTypeTestModel.m */,
+			);
+			path = TestModels;
+			sourceTree = "<group>";
+		};
+		5AE4676D1B4E17A200957C31 /* JsonFile */ = {
+			isa = PBXGroup;
+			children = (
+				5AE4676E1B4E17A200957C31 /* complex.json */,
+				5AE4676F1B4E17A200957C31 /* irregular_key.json */,
+				5AE467701B4E17A200957C31 /* multi_complex.json */,
+				5AE467711B4E17A200957C31 /* simple_type.json */,
+				5AE467721B4E17A200957C31 /* single_complex.json */,
+			);
+			path = JsonFile;
+			sourceTree = "<group>";
+		};
+		E9458CCF042A151BD8996291 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79BD5CCFBA0116482AB864FC /* libPods-JsonReciprocityTests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,9 +314,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AE4672D1B4E175400957C31 /* Build configuration list for PBXNativeTarget "JsonReciprocityTests" */;
 			buildPhases = (
+				C36B645C30877C692AAB6E8B /* Check Pods Manifest.lock */,
 				5AE4671C1B4E175400957C31 /* Sources */,
 				5AE4671D1B4E175400957C31 /* Frameworks */,
 				5AE4671E1B4E175400957C31 /* Resources */,
+				D2E4BB002D51CA087C5C3F8C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -199,9 +372,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE467731B4E17A200957C31 /* complex.json in Resources */,
+				5AE467751B4E17A200957C31 /* irregular_key.json in Resources */,
 				5AE467161B4E175400957C31 /* Main.storyboard in Resources */,
 				5AE4671B1B4E175400957C31 /* LaunchScreen.xib in Resources */,
+				5AE4677B1B4E17A200957C31 /* single_complex.json in Resources */,
+				5AE467771B4E17A200957C31 /* multi_complex.json in Resources */,
 				5AE467181B4E175400957C31 /* Images.xcassets in Resources */,
+				5AE467791B4E17A200957C31 /* simple_type.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,19 +387,64 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE467741B4E17A200957C31 /* complex.json in Resources */,
+				5AE467781B4E17A200957C31 /* multi_complex.json in Resources */,
+				5AE4677C1B4E17A200957C31 /* single_complex.json in Resources */,
+				5AE467761B4E17A200957C31 /* irregular_key.json in Resources */,
+				5AE4677A1B4E17A200957C31 /* simple_type.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C36B645C30877C692AAB6E8B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D2E4BB002D51CA087C5C3F8C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JsonReciprocityTests/Pods-JsonReciprocityTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5AE467031B4E175400957C31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE467471B4E177700957C31 /* PersonModel.m in Sources */,
 				5AE467131B4E175400957C31 /* ViewController.m in Sources */,
 				5AE467101B4E175400957C31 /* AppDelegate.m in Sources */,
 				5AE4670D1B4E175400957C31 /* main.m in Sources */,
+				5AE4673B1B4E177200957C31 /* JsonSerialization.m in Sources */,
+				5AE467451B4E177700957C31 /* CarModel.m in Sources */,
+				5AE4673D1B4E177200957C31 /* NSObject+JsonReciprocity.m in Sources */,
+				5AE467461B4E177700957C31 /* HouseModel.m in Sources */,
+				5AE4673A1B4E177200957C31 /* JsonDeserializstion.m in Sources */,
+				5AE4673C1B4E177200957C31 /* NSMutableDictionary+SafeSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +452,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE4675F1B4E179700957C31 /* ComplexStructureTest.m in Sources */,
+				5AE467691B4E179700957C31 /* IrregularTestModel.m in Sources */,
+				5AE4676B1B4E179700957C31 /* PersonMTLModel.m in Sources */,
 				5AE467271B4E175400957C31 /* JsonReciprocityTests.m in Sources */,
+				5AE467671B4E179700957C31 /* HouseJsonModel.m in Sources */,
+				5AE467651B4E179700957C31 /* CarJsonModel.m in Sources */,
+				5AE467601B4E179700957C31 /* ExchangeEachTests.m in Sources */,
+				5AE467681B4E179700957C31 /* HouseMTLModel.m in Sources */,
+				5AE467631B4E179700957C31 /* ObjectSerialization.m in Sources */,
+				5AE467611B4E179700957C31 /* IrregularTest.m in Sources */,
+				5AE4676A1B4E179700957C31 /* PersonJsonModel.m in Sources */,
+				5AE4676C1B4E179700957C31 /* SimpleTypeTestModel.m in Sources */,
+				5AE467621B4E179700957C31 /* JsonSerializationTest.m in Sources */,
+				5AE467641B4E179700957C31 /* SimpleTypeTest.m in Sources */,
+				5AE467661B4E179700957C31 /* CarMTLModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +604,7 @@
 		};
 		5AE4672E1B4E175400957C31 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F72276313C23B4CF8F8F2F0 /* Pods-JsonReciprocityTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -386,6 +624,7 @@
 		};
 		5AE4672F1B4E175400957C31 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B177AFAFFEC0772B471A0E27 /* Pods-JsonReciprocityTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -418,6 +657,7 @@
 				5AE4672C1B4E175400957C31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5AE4672D1B4E175400957C31 /* Build configuration list for PBXNativeTarget "JsonReciprocityTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +666,7 @@
 				5AE4672F1B4E175400957C31 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

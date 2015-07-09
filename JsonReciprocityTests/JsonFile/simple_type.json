@@ -1,0 +1,24 @@
+{
+
+"shortNumber": 121,
+"intNumber": 12,
+"longNumber": 12124,
+"integerNumber": 12124,
+"numberInt":12124,
+
+"floatNumber": 12.12,
+"doubleNumber": 121231312.124,
+"cgfloatNumber": 121231312.124,
+"numberFloat": 121231312.124,
+
+"boolYES": true,
+"numberBool": false,
+"boolNum": 1,
+
+"timestamp":1430647083,
+
+"date":1430647083,
+
+"string":"this is string.",
+
+}
