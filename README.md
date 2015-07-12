@@ -29,7 +29,7 @@ JsonReciprocity
         - [customFormat:value:](#delegate_custom_format)
     * [Solution for Some Cases 【某些情况下的解决办法】](#solution)
         - [One to many【一对多】](#one_many)
-        - [many to one【多对一】](#many_one)
+        - [Many to one【多对一】](#many_one)
 * [Compare with other framework【框架对比】](#compare)
 * [More【其他用法】](#more)
 * [About【关于】](#about)
