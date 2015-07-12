@@ -1,9 +1,9 @@
 JsonReciprocity
 ===
 
-* A wonderful framework conversion between JsonString and JsonObject. Convenient、Flexible、Easy to Use.<br>方便、灵活、好用的Json与Object互转框架。
+* A wonderful framework for converting between JsonString and JsonObject. Convenient、Flexible、Easy to Use.<br>方便、灵活、好用的Json与Object互转框架。
 
-* The framework is Category of NSObject , don't need to extends any class.<br>
+* The framework is Category of NSObject, don't need to extends any class.<br>
 框架是NSObject的分类，不需要继承任何基类即可使用。
 
 ##目录
