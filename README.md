@@ -7,9 +7,10 @@ JsonReciprocity
 框架是NSObject的分类，不需要继承任何基类即可使用。
 
 ##目录
+
 * [setup 【安装】](#setup)
-    *[Setup with pod【通过pod管理】](#setup_pod)
-    *[Manually手动管理】](#setup_manually)
+    * [Setup with pod【通过pod管理】](#setup_pod)
+    * [Manually手动管理】](#setup_manually)
 * [Get Start 【使用】](#get_start)
 	* [Define【设定】](#define)
 	* [Common usage 【基本用法】](#common_usage)
@@ -444,9 +445,9 @@ More cases reference to `JsonReciporcity Demo` and `JsonReciporcity Tests` 【�
 ##<a id="about"></a>About (关于)
 
 ###<a id="writer"></a>Writer 【作者信息】
-GitHub主页:[Javen](https://github.com/javenl)
-QQ：412775083
-Email：412775083@qq.com
+GitHub主页:[Javen](https://github.com/javenl)<br>
+QQ：412775083<br>
+Email：412775083@qq.com<br>
 
 ###<a id="issue"></a>Issue 【任何问题】
 * 想交流的可以加qq和发邮件
