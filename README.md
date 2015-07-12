@@ -10,7 +10,7 @@ JsonReciprocity
 
 * [setup 【安装】](#setup)
     * [Setup with pod【通过pod管理】](#setup_pod)
-    * [Manually手动管理】](#setup_manually)
+    * [Manually【手动管理】](#setup_manually)
 * [Get Start 【使用】](#get_start)
 	* [Define【设定】](#define)
 	* [Common usage 【基本用法】](#common_usage)
@@ -21,15 +21,15 @@ JsonReciprocity
         - [JsonDictionary -> JsonString](#dict_string)
         - [JsonObject -> JsonString](#object_string)
         - [JsonString -> JsonObjectArray](#string_object_array)
-	* [JsonReciprocityDelegate](#delegate)
+	* [JsonReciprocityDelegate【Delegate】](#delegate)
         - [classReferenceDictForArray](#delegate_dict_array)
         - [customReferenceDict](#delegate_dict)
         - [isIgnorePropertyKey](#delegate_ignore)
         - [autoUpperCaseToCamelCase](#delegate_autocase)
         - [customFormat:value:](#delegate_custom_format)
     * [Solution for Some Cases 【某些情况下的解决办法】](#solution)
-        - [One to many](#one_many)
-        - [many to one](#many_one)
+        - [One to many【一对多】](#one_many)
+        - [many to one【多对一】](#many_one)
 * [Compare with other framework【框架对比】](#compare)
 * [More【其他用法】](#more)
 * [About【关于】](#about)
@@ -41,7 +41,7 @@ JsonReciprocity
 ##<a id="setup"></a>setup 【安装】
 
 ###<a id=""></a>Setup with pod 【通过pod管理】
-```
+```ruby
 pod 'JsonReciprocity', '~> 1.0.0'
 ```
 
@@ -280,7 +280,7 @@ JsonString and JsonObject
 
 ```
 
-###<a id="delegate"></a>JsonReciprocityDelegate
+###<a id="delegate"></a>JsonReciprocityDelegate【Delegate】
 
 通过实现JsonReciprocityDelegate，可以有更多灵活的用法。
 
