@@ -11,11 +11,11 @@
 #import "NSObject+JsonReciprocity.h"
 #import "JsonReciprocity.h"
 
-@interface IrregularTest : XCTestCase
+@interface IrregularTests : XCTestCase
 
 @end
 
-@implementation IrregularTest
+@implementation IrregularTests
 
 - (void)testIrregular {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"irregular_key" ofType:@"json"];

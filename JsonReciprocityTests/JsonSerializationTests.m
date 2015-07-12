@@ -13,11 +13,11 @@
 #import <MGBenchmarkSession.h>
 #import "JsonReciprocity.h"
 
-@interface JsonSerializationTest : XCTestCase
+@interface JsonSerializationTests : XCTestCase
 
 @end
 
-@implementation JsonSerializationTest
+@implementation JsonSerializationTests
 
 
 - (void)testPerformanceExample {

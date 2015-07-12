@@ -17,6 +17,11 @@
 - (id)customFormat:(NSString *)keyPath value:(id)value;
 
 /**
+ * 是否需要忽略某些字段，默认为 NO
+ */
+- (BOOL)isIgnorePropertyKey:(NSString *)key;
+
+/**
  * 自定义映射字典
  */
 + (NSDictionary *)customReferenceDict;
@@ -38,7 +43,7 @@
 /**
  *  Object -> NSDictionary
  */
-- (NSDictionary *)toDictionary;
+- (NSDictionary *)toJsonDictionary;
 
 /**
  *  NSDictionary -> Object

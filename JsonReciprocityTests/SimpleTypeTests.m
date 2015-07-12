@@ -11,13 +11,13 @@
 #import "NSObject+JsonReciprocity.h"
 #import "JsonReciprocity.h"
 
-@interface SimpleTypeTest : XCTestCase
+@interface SimpleTypeTests : XCTestCase
 
 @end
 
-@implementation SimpleTypeTest
+@implementation SimpleTypeTests
 
-- (void)testSimpleType {    
+- (void)testSimpleType {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"simple_type" ofType:@"json"];
     NSString *json = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     XCTAssertNotNil(json);
@@ -46,6 +46,7 @@
     XCTAssertEqualObjects(model.date, [NSDate dateWithTimeIntervalSince1970:1430647083]);
     
     XCTAssertEqualObjects(model.string, @"this is string.");
+    XCTAssertEqualObjects(model.url.absoluteString, @"http://www.baidu.com");
 }
 
 @end

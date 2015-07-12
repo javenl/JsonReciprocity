@@ -27,4 +27,8 @@
              };
 }
 
+- (NSString *)description {
+    return [NSString jsonStringFromObject:self isPretty:YES];
+}
+
 @end

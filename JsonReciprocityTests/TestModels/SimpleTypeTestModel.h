@@ -32,4 +32,6 @@
 
 @property (copy, nonatomic) NSString *string;
 
+@property (copy, nonatomic) NSURL *url;
+
 @end

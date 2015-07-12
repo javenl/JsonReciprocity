@@ -19,11 +19,11 @@
 #import <NSObject+MJKeyValue.h>
 #import <NSObject+MJProperty.h>
 
-@interface ObjectSerialization : XCTestCase
+@interface ObjectSerializationTests : XCTestCase
 
 @end
 
-@implementation ObjectSerialization
+@implementation ObjectSerializationTests
 
 - (void)testPerformanceExample {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"multi_complex" ofType:@"json"];

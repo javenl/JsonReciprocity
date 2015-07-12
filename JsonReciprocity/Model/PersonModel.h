@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HouseModel.h"
+#import "JsonReciprocity.h"
 
-@interface PersonModel : NSObject
+@interface PersonModel : NSObject <JsonReciprocityDelegate>
 
 @property (nonatomic, assign) NSInteger id;
 @property (nonatomic, copy) NSString *name;

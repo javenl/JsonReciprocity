@@ -13,11 +13,11 @@
 #import "HouseModel.h"
 #import "CarModel.h"
 
-@interface ComplexStructureTest : XCTestCase
+@interface ComplexStructureTests : XCTestCase
 
 @end
 
-@implementation ComplexStructureTest
+@implementation ComplexStructureTests
 
 - (void)testExchange {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"complex" ofType:@"json"];

@@ -57,7 +57,7 @@
     
     NSArray *jsonArray = @[];
     for (PersonModel *person in srcPersons) {
-        NSDictionary *personDict = [person toDictionary];
+        NSDictionary *personDict = [person toJsonDictionary];
         XCTAssertEqual(personDict[@"id"], @(person.id));
         XCTAssertEqual(personDict[@"name"], person.name);
 //        NSLog(@"score %@, score %@", personDict[@"score"], @(person.score));

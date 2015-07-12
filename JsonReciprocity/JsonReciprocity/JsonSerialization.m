@@ -5,9 +5,10 @@
 //  Copyright (c) 2015年 liu. All rights reserved.
 //
 
+#import "NSObject+JsonReciprocity.h"
 #import "JsonSerialization.h"
 #import "JsonDeserialization.h"
-#import "NSObject+JsonReciprocity.h"
+
 
 @implementation NSObject (JsonSerialization)
 
@@ -30,7 +31,7 @@
 + (NSString *)jsonStringFromObject:(id)object isPretty:(BOOL)isPretty {
     id obj = object;
     if (![obj isKindOfClass:[NSArray class]] && ![obj isKindOfClass:[NSDictionary class]]) {
-        obj = [self toDictionary];
+        obj = [obj toJsonDictionary];
     }
     if (![NSJSONSerialization isValidJSONObject:obj]) {
         return nil;

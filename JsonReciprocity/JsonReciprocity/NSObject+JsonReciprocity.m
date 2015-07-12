@@ -67,12 +67,17 @@
 
 #pragma mark - Object -> NSDictionary
 
-- (NSDictionary *)toDictionary {
+- (NSDictionary *)toJsonDictionary {
     NSMutableDictionary *propertyDict = [NSMutableDictionary dictionary];
     NSArray *propertys = [self propertys];
     for (NSString *property in propertys) {
-        id value = [NSObject getObjectInternal:[self valueForKey:property]];
-        [propertyDict safeSetObject:value forKey:property placeHolderObject:[NSNull null]];
+        if (![property isEqualToString:@"superclass"] &&
+            ![property isEqualToString:@"hash"] &&
+            ![property isEqualToString:@"description"] &&
+            ![property isEqualToString:@"debugDescription"]) {//忽略一些关键字
+            id value = [NSObject getObjectInternal:[self valueForKey:property]];
+            [propertyDict safeSetObject:value forKey:property placeHolderObject:[NSNull null]];
+        }
     }
     return propertyDict;
 }
@@ -84,6 +89,10 @@
     
     if([obj isKindOfClass:[NSDate class]]) {
         return @([obj timeIntervalSince1970]);
+    }
+    
+    if([obj isKindOfClass:[NSURL class]]) {
+        return [obj absoluteString];
     }
 
     if([obj isKindOfClass:[NSArray class]]) {
@@ -104,7 +113,7 @@
         return dic;
     }
     
-    return [obj toDictionary];
+    return [obj toJsonDictionary];
 }
 
 #pragma mark - NSDictionary -> Object
@@ -143,33 +152,51 @@
             propertyKey = key;
         }
         
-        NSString *className = objectPropertyTypes[propertyKey];
-        
-        if ([object respondsToSelector:@selector(customFormat:value:)]) {
-            value = [object customFormat:propertyKey value:value];
+        if ([object respondsToSelector:@selector(isIgnorePropertyKey:)]) {
+            if ([object isIgnorePropertyKey:propertyKey]) {
+                continue;
+            }
         }
         
+        NSString *className = objectPropertyTypes[propertyKey];
         if (className == nil) {
             JRLog(@"No Propertykey %@ In %@", propertyKey, NSStringFromClass(self));
             continue;
         }
         
+        if ([object respondsToSelector:@selector(customFormat:value:)]) {
+            value = [object customFormat:propertyKey value:value];
+        }
+        
         if (className.length > 0) {
-            id property = nil;
-            if ([className isEqualToString:@"NSNumber"]) {//NSNumber 不能使用init方法
-                property = [NSNumber numberWithInt:0];
-            } else {
-                Class propertyClass = NSClassFromString(className);
-                property = [[propertyClass alloc] init];
-            }
-            
-            if ([property isSupportedClasses] || [property isKindOfClass:[NSDictionary class]]) { //基础类型和字典直接设值
-                if ([property isKindOfClass:[NSDate class]]) {
+            //特殊基础类型
+            if ([className isEqualToString:@"NSDate"]) {//NSDate 用dateWithTimeIntervalSince1970初始化
+                if ([value isKindOfClass:[NSNumber class]]) {
                     value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
                 }
-                if ([property isKindOfClass:[NSURL class]]) {
-                    value = [NSURL URLWithString:value];
-                }
+                [object setValue:value forKey:propertyKey];
+                continue;
+            } else if ([className isEqualToString:@"NSURL"]) {//NSURL 用URLWithString初始化
+                value = [NSURL URLWithString:value];
+                [object setValue:value forKey:propertyKey];
+                continue;
+            } else if ([className isEqualToString:@"NSNumber"]) {
+                [object setValue:value forKey:propertyKey];
+                continue;
+            }
+            
+            Class propertyClass = NSClassFromString(className);
+            id property = [[propertyClass alloc] init];
+            
+            if ([property isSupportedClasses] || [property isKindOfClass:[NSDictionary class]]) { //基础类型和字典直接设值
+                
+//                if ([property isKindOfClass:[NSDate class]]) {
+//                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
+//                }
+//                if ([property isKindOfClass:[NSURL class]]) {
+//                    value = [NSURL URLWithString:value];
+//                }
+                
                 [object setValue:value forKey:propertyKey];
                 
             } else if ([property isKindOfClass:[NSArray class]]) { //数组需要递归
@@ -221,7 +248,7 @@
 }
 
 - (BOOL)isSupportedClasses {
-    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:[NSNumber class]] || [self isKindOfClass:[NSDate class]] || [self isKindOfClass:[NSURL class]]
+    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:[NSNumber class]] //|| [self isKindOfClass:[NSDate class]] || [self isKindOfClass:[NSURL class]]
         ) {
         return YES;
     } else {
