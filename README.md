@@ -451,12 +451,12 @@ Email：412775083@qq.com<br>
 
 ###<a id="issue"></a>Issue 【任何问题】
 
-* Communication with email or QQ.
+* Communication with Email or QQ.
 * If find bugs, feedback to me immediately.
 * If need some feature, feedback to me.
 * If some better idea, feedback to me.
 * If you want contribution, Pull Requests.
-
+<br>
 * 想交流的可以加qq和发邮件
 * 如果发现任何bug，希望你立即告诉我
 * 希望有什么新功能，请尽管告诉我
