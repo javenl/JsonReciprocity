@@ -69,8 +69,7 @@ JsonReciprocity
 
 ###<a id="define"></a>Define 【设定】 
 
-JsonString and JsonObject
-
+JsonString and JsonObject in the example.【例子中使用的JsonString和JsonObject】
 <table>
 <tr>
 <td valign="top">
@@ -98,15 +97,34 @@ JsonString and JsonObject
 </td>
 <td valign="top">
 <pre>
-@interface PersonModel : NSObject
-
+//PersonModel
+@interface PersonModel : NSObject <JsonReciprocityDelegate>
 @property (nonatomic, assign) NSInteger id;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) CGFloat score;
 @property (nonatomic, strong) NSDate *registerDate;
 @property (nonatomic, assign) NSTimeInterval lastLoginTime;
 @property (nonatomic, strong) NSArray *cars;
+@property (nonatomic, strong) HouseModel *house;
+@end
 
+@implementation PersonModel
++ (NSDictionary *)classReferenceDictForArray {
+    return @{@"cars": [CarModel class]};
+}
+@end
+
+//CarModel
+@interface CarModel : NSObject
+@property (copy, nonatomic) NSString *num;
+@property (copy, nonatomic) NSString *brand;
+@end
+
+//HouseModel
+@interface HouseModel : NSObject
+@property (copy, nonatomic) NSString *address;
+@property (assign, nonatomic) CGFloat area;
+@property (strong, nonatomic) NSArray *tags;
 @end
 </pre>
 </td>
@@ -130,12 +148,20 @@ JsonString and JsonObject
         \"score\" : 88.33,\
         \"register_date\" : 1428647083,\
         \"last_login_time\" : 1430642742,\
+        \"house\": {\
+            \"address\": \"GuangZhou China\",\
+            \"area\": 95.6,\
+            \"tags\":[\
+                \"nice\",\
+                \"comfort\"\
+            ]}\
+        },\
         \"cars\":[{\
             \"brand\":\"benz\",\
             \"num\":\"A14212\"\
         }]\
     }";
-    NSDictionary *jsonDictionary = [jsonString toDictionary];
+    NSDictionary *jsonDictionary = [jsonString toJsonDictionary];
     NSLog(@"jsonString: %@", jsonString);
     NSLog(@"jsonDictionary: %@", jsonDictionary);
 }
@@ -151,6 +177,12 @@ JsonString and JsonObject
                                      @"score" : @"88.33",
                                      @"register_date": @"1428647083",
                                      @"last_login_time" : @"1430642742",
+                                     @"house" : @{
+                                             @"address" : @"GuangZhou China",
+                                             @"area" : @(95.6),
+                                             @"tags" : @[@"nice",
+                                                         @"comfort"]
+                                             },
                                      @"cars" : @[@{
                                                   @"brand":@"benz",
                                                   @"num":@"A14212"
@@ -158,7 +190,7 @@ JsonString and JsonObject
                                      };
     PersonModel *personModel = [PersonModel objectFromJsonDict:jsonDictionary];
     NSLog(@"jsonDictionary: %@", jsonDictionary);
-    NSLog(@"personModel: %@", personModel.toJsonString);
+    NSLog(@"jsonObject: %@", personModel);
 }
 ```
 
@@ -168,19 +200,27 @@ JsonString and JsonObject
 - (void)jsonStringToJsonObject {
     NSString *jsonString = @"\
     {\
-        \"id\": 1420194,\
-        \"name\" : \"Jack\",\
-        \"score\" : 88.33,\
-        \"register_date\" : 1428647083,\
-        \"last_login_time\" : 1430642742,\
-        \"cars\":[{\
-            \"brand\":\"benz\",\
-            \"num\":\"A14212\"\
-        }]\
+    \"id\": 1420194,\
+    \"name\" : \"Jack\",\
+    \"score\" : 88.33,\
+    \"register_date\" : 1428647083,\
+    \"last_login_time\" : 1430642742,\
+    \"house\": {\
+        \"address\": \"GuangZhou China\",\
+        \"area\": 95.6,\
+        \"tags\":[\
+            \"nice\",\
+            \"comfort\"\
+        ]}\
+    },\
+    \"cars\":[{\
+        \"brand\":\"benz\",\
+        \"num\":\"A14212\"\
+    }]\
     }";
-    PersonModel *personModel = [PersonModel objectFromJsonDict:jsonString.toJsonDictionary];
+    PersonModel *personModel = [PersonModel objectFromJsonDict:[jsonString toJsonDictionary]];
     NSLog(@"jsonString: %@", jsonString);
-    NSLog(@"personModel: %@", personModel.toJsonString);
+    NSLog(@"jsonModel: %@", personModel);
 }
 ```
 
@@ -193,13 +233,20 @@ JsonString and JsonObject
     personModel.name = @"Jack";
     personModel.score = 88.33;
     personModel.registerDate = [NSDate dateWithTimeIntervalSince1970:1428647083];
+
+    HouseModel *house = [[HouseModel alloc] init];
+    house.address = @"GuangZhou China";
+    house.area = 95.6;
+    house.tags = @[@"nice", @"comfort"];
+    personModel.house = house;
+
     CarModel *car = [[CarModel alloc] init];
     car.brand = @"benz";
     car.num = @"A14212";
     personModel.cars = @[car];
-    
+
     NSDictionary *jsonDictionary = [personModel toJsonDictionary];
-    
+
     NSLog(@"jsonObject: %@", personModel);
     NSLog(@"jsonDictionary: %@", jsonDictionary);
 }
@@ -215,6 +262,12 @@ JsonString and JsonObject
                                      @"score" : @"88.33",
                                      @"register_date": @"1428647083",
                                      @"last_login_time" : @"1430642742",
+                                     @"house" : @{
+                                             @"address" : @"GuangZhou China",
+                                             @"area" : @(95.6),
+                                             @"tags" : @[@"nice",
+                                                         @"comfort"]
+                                             },
                                      @"cars" : @[@{
                                                      @"brand":@"benz",
                                                      @"num":@"A14212"
@@ -236,6 +289,13 @@ JsonString and JsonObject
     personModel.name = @"Jack";
     personModel.score = 88.33;
     personModel.registerDate = [NSDate dateWithTimeIntervalSince1970:1428647083];
+
+    HouseModel *house = [[HouseModel alloc] init];
+    house.address = @"GuangZhou China";
+    house.area = 95.6;
+    house.tags = @[@"nice", @"comfort"];
+    personModel.house = house;
+
     CarModel *car = [[CarModel alloc] init];
     car.brand = @"benz";
     car.num = @"A14212";
@@ -259,6 +319,14 @@ JsonString and JsonObject
         \"score\" : 88.33,\
         \"register_date\" : 1428647083,\
         \"last_login_time\" : 1430642742,\
+        \"house\": {\
+            \"address\": \"GuangZhou China\",\
+            \"area\": 95.6,\
+            \"tags\":[\
+                \"nice\",\
+                \"comfort\"\
+            ]}\
+        },\
         \"cars\":[{\
             \"brand\":\"benz\",\
             \"num\":\"A14212\"\
@@ -269,25 +337,35 @@ JsonString and JsonObject
         \"score\" : 88.33,\
         \"register_date\" : 1428647083,\
         \"last_login_time\" : 1430642742,\
+        \"house\": {\
+            \"address\": \"GuangZhou China\",\
+            \"area\": 95.6,\
+            \"tags\":[\
+                \"nice\",\
+                \"comfort\"\
+            ]}\
+        },\
         \"cars\":[{\
             \"brand\":\"benz\",\
             \"num\":\"A14212\"\
         }]\
     }]";
     NSArray *personModels = [PersonModel objectArrayFromJsonArray:[jsonString toJsonArray]];
+
     NSLog(@"jsonString: %@", jsonString);
     NSLog(@"jsonObjects: %@", personModels);
 }
-
 ```
 
 ###<a id="delegate"></a>JsonReciprocityDelegate【Delegate】
 
-通过实现JsonReciprocityDelegate，可以有更多灵活的用法。
+More flexible when using JsonReciprocityDelegate.<br>
+【通过实现JsonReciprocityDelegate，可以有更多灵活的用法。】
 
 ####<a id="delegate_dict_array"></a>classReferenceDictForArray
 
-If the json object contains another object array, it is necessary to indicate what class it need to reference. Otherwise, it is a NSArray with NSDictionary.  【如果需要转换的JsonObject中又包含了其他对象的数组，需要指定该数组应该自动转换成什么类型的对象数组，否则就映射成一个字典数组。】
+If the json object contains another object array, it is necessary to indicate what class it need to reference. Otherwise, it is a NSArray with NSDictionary. <br>
+【如果需要转换的JsonObject中又包含了其他对象的数组，需要指定该数组应该自动转换成什么类型的对象数组，否则就映射成一个字典数组。】
 
 ```objectivec
 + (NSDictionary *)classReferenceDictForArray {
@@ -297,15 +375,40 @@ If the json object contains another object array, it is necessary to indicate wh
 
 ####<a id="delegate_dict"></a>customReferenceDict
 
-alias with property name  【指定映射的别名】
+Alias with property name  【指定映射的别名】
 
-```objectivec
+<table>
+<tr>
+<td valign="top">
+<pre>
+{
+    "indexIdString" : @"111",
+    "name" : @"jack",
+    "personal_info_deatil" : @"A nice man"
+}
+</pre>
+</td>
+<td valign="top">
+<pre>
+@interface TestModel : NSObject <JsonReciprocityDelegate>
+@property (assign, nonatomic) NSInteger index;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *detail;
+@end
+
+@implementation TestModel
 + (NSDictionary *)customReferenceDict {
     return @{
              @"indexIdString": @"index",
+             @"personal_info_deatil" : "detail"
              };
 }
-```
+@end
+</pre>
+</td>
+</tr>
+</table>
+
 PS:Only define the custom property, other properties will auto reference.  【不需要把每个变量都写上，只需要写特定的，其他没指定的依然会按照变量名命映射。】
 
 ####<a id="delegate_ignore"></a>isIgnorePropertyKey:
@@ -332,7 +435,7 @@ Auto convert UpperCase tp CamelCase, default is YES. If you don't need to conver
 }
 ```
 
-Example 【例子】<br>
+Auto convert Example 【自动转换例子】<br>
 
 Without a word, only to define the model, frameword will help you to convert this Irregular json string.
 【你不需要写任何代码，把模型定义好，框架就能帮你转换这些不规则的json字符串。】
@@ -352,7 +455,7 @@ Without a word, only to define the model, frameword will help you to convert thi
 </td>
 <td valign="top">
 <pre>
-@interface IrregularTestModel : NSObject
+@interface IrregularTestModel : NSObject 
 
 @property (assign, nonatomic) NSInteger id;
 @property (assign, nonatomic) NSInteger userId;
@@ -367,18 +470,49 @@ Without a word, only to define the model, frameword will help you to convert thi
 </table>
 
 ####<a id="delegate_custom_format"></a>customFormat:value:
-```objectivec
-//jsonString = @"{\"date\":\"2015/07/11\"}"
+
+If value is incorrect auto converting, you can custom value as you want.<br>
+【如果无法自动值转换正确类型，可以自定义转换的值】
+
+<table>
+<tr>
+<td valign="top">
+<pre>
+{
+    "date1" : "2015/07/11",
+    "date2" : "2015.05.29",
+    "content_detail" : "this is a detail",
+}
+</pre>
+</td>
+<td valign="top">
+<pre>
+@interface TestModel : NSObject <JsonReciprocityDelegate>
+@property (strong, nonatomic) NSDate *date1;
+@property (strong, nonatomic) NSDate *date2;
+@property (strong, nonatomic) NSString *str;
+@end
+
+@implementation TestModel
 - (id)customFormat:(NSString *)keyPath value:(id)value {
-    if ([keyPath isEqualToString:@"date"]) {
+    if ([keyPath isEqualToString:@"date1"]) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy/MM/dd";
+        NSDate *date = [formatter dateFromString:value];
+        return date;
+    } else if ([keyPath isEqualToString:@"date2"]) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy.MM.dd";
         NSDate *date = [formatter dateFromString:value];
         return date;
     }
     return value;
 }
-```
+@end
+</pre>
+</td>
+</tr>
+</table>
 
 ###<a id="solution"></a>Solution for Some Cases 【特殊情况下的解决办法】
 
@@ -446,7 +580,7 @@ More cases reference to `JsonReciporcity Demo` and `JsonReciporcity Tests` 【�
 ##<a id="about"></a>About (关于)
 
 ###<a id="writer"></a>Writer 【作者信息】
-GitHub主页:[Javen](https://github.com/javenl)<br>
+GitHub:[Javen](https://github.com/javenl)<br>
 QQ：412775083<br>
 Email：412775083@qq.com<br>
 
@@ -457,6 +591,7 @@ Email：412775083@qq.com<br>
 * If need some feature, feedback to me.
 * If some better idea, feedback to me.
 * If you want contribution, Pull Requests.
+<br>
 <br>
 * 想交流的可以加qq和发邮件
 * 如果发现任何bug，希望你立即告诉我

@@ -82,12 +82,12 @@
         \"register_date\" : 1428647083,\
         \"last_login_time\" : 1430642742,\
         \"house\": {\
-        \"address\": \"GuangZhou China\",\
-        \"area\": 95.6,\
-        \"tags\":[\
+            \"address\": \"GuangZhou China\",\
+            \"area\": 95.6,\
+            \"tags\":[\
                 \"nice\",\
                 \"comfort\"\
-                ]}\
+            ]}\
         },\
         \"cars\":[{\
             \"brand\":\"benz\",\
@@ -109,6 +109,12 @@
                                      @"score" : @"88.33",
                                      @"register_date": @"1428647083",
                                      @"last_login_time" : @"1430642742",
+                                     @"house" : @{
+                                             @"address" : @"GuangZhou China",
+                                             @"area" : @(95.6),
+                                             @"tags" : @[@"nice",
+                                                         @"comfort"]
+                                             },
                                      @"cars" : @[@{
                                                   @"brand":@"benz",
                                                   @"num":@"A14212"
@@ -185,6 +191,12 @@
                                      @"score" : @"88.33",
                                      @"register_date": @"1428647083",
                                      @"last_login_time" : @"1430642742",
+                                     @"house" : @{
+                                             @"address" : @"GuangZhou China",
+                                             @"area" : @(95.6),
+                                             @"tags" : @[@"nice",
+                                                         @"comfort"]
+                                             },
                                      @"cars" : @[@{
                                                      @"brand":@"benz",
                                                      @"num":@"A14212"
@@ -270,7 +282,8 @@
 
 - (void)jsonReciprocityDelegateDemo {
     NSString *jsonString = @"{\
-        \"date\" : \"2015/07/11\",\
+        \"date1\" : \"2015/07/11\",\
+        \"date2\" : \"2015.05.29\",\
         \"content_detail\" : \"this is a detail\",\
         \"test\" : \"Hello world\"\
     }";

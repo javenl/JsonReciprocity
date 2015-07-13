@@ -22,9 +22,14 @@
 }
 
 - (id)customFormat:(NSString *)keyPath value:(id)value {
-    if ([keyPath isEqualToString:@"date"]) {
+    if ([keyPath isEqualToString:@"date1"]) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyy/MM/dd";
+        NSDate *date = [formatter dateFromString:value];
+        return date;
+    } else if ([keyPath isEqualToString:@"date2"]) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy.MM.dd";
         NSDate *date = [formatter dateFromString:value];
         return date;
     }
