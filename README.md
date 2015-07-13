@@ -8,8 +8,8 @@ JsonReciprocity
 
 ##目录
 
-* [setup 【安装】](#setup)
-    * [Setup with pod【通过pod管理】](#setup_pod)
+* [Setup 【安装】](#setup)
+    * [Pod【通过pod管理】](#setup_pod)
     * [Manually【手动管理】](#setup_manually)
 * [Get Start 【使用】](#get_start)
 	* [Define【设定】](#define)
@@ -38,9 +38,10 @@ JsonReciprocity
     
 
 
-##<a id="setup"></a>setup 【安装】
+##<a id="setup"></a>Setup 【安装】
 
-###<a id=""></a>Setup with pod 【通过pod管理】
+###<a id="setup_pod"></a>Pod 【通过pod管理】
+
 ```ruby
 pod 'JsonReciprocity', '~> 1.0.0'
 ```
