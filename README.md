@@ -6,6 +6,10 @@ JsonReciprocity
 * The framework is Category of NSObject, don't need to extends any class.<br>
 框架是NSObject的分类，不需要继承任何基类即可使用。
 
+* If you like the framework or the framework help you a little, please make a star, which is great inspire for me.
+
+* 如果你喜欢这个框架，或者这个框架能给你一点点帮助，希望你可以收藏一下，你的行动就是对我最大的支持。
+
 ##目录
 
 * [Setup 【安装】](#setup)
