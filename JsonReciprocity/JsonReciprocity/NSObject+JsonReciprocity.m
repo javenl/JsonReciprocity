@@ -166,6 +166,8 @@
         
         if ([object respondsToSelector:@selector(customFormat:value:)]) {
             value = [object customFormat:propertyKey value:value];
+            [object setValue:value forKey:propertyKey];
+            continue;
         }
         
         if (className.length > 0) {
