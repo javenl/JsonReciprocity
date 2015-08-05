@@ -2,10 +2,10 @@
 Pod::Spec.new do |s|
 
   s.name         = "JsonReciprocity"
-  s.version      = "1.0.0"
-  s.summary      = "A wonderful framework for converting between JsonString and JsonObject."
+  s.version      = "1.0.1"
+  s.summary      = "The fastest framework for converting between Json String and Json Object."
   s.description  = <<-DESC
-                   A wonderful framework for converting between JsonString and JsonObject. Don't need to extends any class. Convenient、Flexible、Easy to Use.
+                   The fastest framework for converting between Json String and Json Object. This is a category that don't need to extends any other class. Convenient、Flexible、Easy to Use.
                    DESC
 
   s.homepage     = "https://github.com/javenl/JsonReciprocity"
