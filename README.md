@@ -10,6 +10,44 @@ JsonReciprocity
 
 * 如果你喜欢这个框架，或者这个框架能给你一点点帮助，希望你可以收藏一下，你的行动就是对我最大的支持。
 
+##Quick start 【快速使用】
+Easy to use with 7 methods. 【7个基本方法】
+
+JsonString -> JsonDictionary
+```
+NSDictionary *jsonDictionary = [jsonString toJsonDictionary];
+```
+
+JsonDictionary -> JsonObject
+```
+PersonModel *personModel = [PersonModel objectFromJsonDict:jsonDictionary];
+```
+
+JsonString -> JsonObject
+```
+PersonModel *personModel = [PersonModel objectFromJsonDict:[jsonString toJsonDictionary]];
+```
+
+JsonObject -> JsonDictionary
+```
+NSDictionary *jsonDictionary = [personModel toJsonDictionary];
+```
+
+JsonDictionary -> JsonString
+```
+NSString *jsonString = [jsonDictionary toJsonString];
+```
+
+JsonObject -> JsonString
+```
+NSString *jsonString = [personModel toJsonString];
+```
+
+JsonString -> JsonObjectArray
+```
+NSArray *personModels = [PersonModel objectArrayFromJsonArray:[jsonString toJsonArray]];
+```
+
 ##目录
 
 * [Setup 【安装】](#setup)
