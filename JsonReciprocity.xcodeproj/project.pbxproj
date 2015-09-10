@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A320DD31B528B180071F850 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320DD21B528B180071F850 /* TestObject.m */; };
+		5A4B5A261B8D81DD00FC6BA8 /* CustomTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B5A251B8D81DD00FC6BA8 /* CustomTests.m */; };
+		5A4B5A291B8D834600FC6BA8 /* CustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B5A281B8D834600FC6BA8 /* CustomObject.m */; };
 		5AE4670D1B4E175400957C31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4670C1B4E175400957C31 /* main.m */; };
 		5AE467101B4E175400957C31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4670F1B4E175400957C31 /* AppDelegate.m */; };
 		5AE467131B4E175400957C31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467121B4E175400957C31 /* ViewController.m */; };
@@ -62,6 +64,9 @@
 /* Begin PBXFileReference section */
 		5A320DD11B528B180071F850 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
 		5A320DD21B528B180071F850 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
+		5A4B5A251B8D81DD00FC6BA8 /* CustomTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTests.m; sourceTree = "<group>"; };
+		5A4B5A271B8D834600FC6BA8 /* CustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomObject.h; sourceTree = "<group>"; };
+		5A4B5A281B8D834600FC6BA8 /* CustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomObject.m; sourceTree = "<group>"; };
 		5AE467071B4E175400957C31 /* JsonReciprocity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonReciprocity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE4670B1B4E175400957C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AE4670C1B4E175400957C31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -209,6 +214,7 @@
 				5AE4674D1B4E179700957C31 /* SimpleTypeTests.m */,
 				5AE467261B4E175400957C31 /* JsonReciprocityTests.m */,
 				5AE467241B4E175400957C31 /* Supporting Files */,
+				5A4B5A251B8D81DD00FC6BA8 /* CustomTests.m */,
 			);
 			path = JsonReciprocityTests;
 			sourceTree = "<group>";
@@ -271,6 +277,8 @@
 				5AE4675C1B4E179700957C31 /* PersonMTLModel.m */,
 				5AE4675D1B4E179700957C31 /* SimpleTypeTestModel.h */,
 				5AE4675E1B4E179700957C31 /* SimpleTypeTestModel.m */,
+				5A4B5A271B8D834600FC6BA8 /* CustomObject.h */,
+				5A4B5A281B8D834600FC6BA8 /* CustomObject.m */,
 			);
 			path = TestModels;
 			sourceTree = "<group>";
@@ -464,6 +472,8 @@
 				5AE467271B4E175400957C31 /* JsonReciprocityTests.m in Sources */,
 				5AE467671B4E179700957C31 /* HouseJsonModel.m in Sources */,
 				5AE467651B4E179700957C31 /* CarJsonModel.m in Sources */,
+				5A4B5A261B8D81DD00FC6BA8 /* CustomTests.m in Sources */,
+				5A4B5A291B8D834600FC6BA8 /* CustomObject.m in Sources */,
 				5AE467601B4E179700957C31 /* ExchangeEachTests.m in Sources */,
 				5AE467681B4E179700957C31 /* HouseMTLModel.m in Sources */,
 				5AE467631B4E179700957C31 /* ObjectSerializationTests.m in Sources */,
