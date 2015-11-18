@@ -36,7 +36,7 @@
     
     CustomObject *object = [CustomObject objectFromJsonDict:[str toJsonDictionary]];
     NSLog(@"object %@", [object toPrettyJsonString]);
-    NSLog(@"properties %@", object.propertys);
+    NSLog(@"properties %@", [CustomObject propertys]);
     [object setValue:@"adsf" forKey:@"test"];
 //    object.test = @"ser";
     NSLog(@"object %@", [object toPrettyJsonString]);

@@ -14,12 +14,12 @@
 /**
  * 自定义映射值
  */
-- (id)customFormat:(NSString *)keyPath value:(id)value;
++ (id)customFormat:(NSString *)keyPath value:(id)value;
 
 /**
  * 是否需要忽略某些字段，默认为 NO
  */
-- (BOOL)isIgnorePropertyKey:(NSString *)key;
++ (BOOL)isIgnorePropertyKey:(NSString *)key;
 
 /**
  * 自定义映射字典
@@ -58,11 +58,11 @@
 /**
  *  Dictionary With Key->Property Name, Value->Class Name
  */
-- (NSDictionary *)propertysWithTypes;
++ (NSDictionary *)propertysWithTypes;
 
 /**
  *  NSArray With All Property Name
  */
-- (NSArray *)propertys;
++ (NSArray *)propertys;
 
 @end
