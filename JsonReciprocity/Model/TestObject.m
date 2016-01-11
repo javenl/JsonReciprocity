@@ -14,7 +14,7 @@
     return @{@"content_detail" : @"str"};
 }
 
-- (BOOL)isIgnorePropertyKey:(NSString *)key {
++ (BOOL)isIgnorePropertyKey:(NSString *)key {
     if ([key isEqualToString:@"test"]) {
         return YES;
     }

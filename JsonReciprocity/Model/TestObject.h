@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "JsonReciprocity.h"
+#import "BaseObject.h"
 
-@interface TestObject : NSObject <JsonReciprocityDelegate>
+@interface TestObject : BaseObject <JsonReciprocityDelegate>
 
 @property (strong, nonatomic) NSDate *date1;
 @property (strong, nonatomic) NSDate *date2;
-@property (strong, nonatomic) NSString *str;
+
 @property (strong, nonatomic) NSString *test;
 
 @end

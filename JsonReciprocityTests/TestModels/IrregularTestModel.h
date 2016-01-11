@@ -18,5 +18,6 @@
 @property (strong, nonatomic) NSDate *lastDate;
 @property (copy, nonatomic) NSString *car;
 @property (copy, nonatomic) NSString *camelCaseTest;
+@property (copy, nonatomic) NSString *upper_case;
 
 @end

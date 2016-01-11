@@ -12,7 +12,8 @@
 
 + (NSDictionary *)customReferenceDict {
     return @{@"Id": @"id",
-             @"qiche": @"car"};
+             @"qiche": @"car",
+             @"upper_case": @"upper_case"};
 }
 
 @end

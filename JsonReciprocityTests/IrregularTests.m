@@ -32,6 +32,7 @@
     XCTAssertEqualObjects(model.lastDate, [NSDate dateWithTimeIntervalSince1970:1430647083]);
     XCTAssertEqualObjects(model.car, @"car");
     XCTAssertEqualObjects(model.camelCaseTest, @"this is string");
+    XCTAssertEqualObjects(model.upper_case, @"upper");
 }
 
 @end

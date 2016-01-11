@@ -10,12 +10,38 @@
 #import "SimpleTypeTestModel.h"
 #import "NSObject+JsonReciprocity.h"
 #import "JsonReciprocity.h"
+#import "TestObject.h"
 
 @interface SimpleTypeTests : XCTestCase
 
 @end
 
 @implementation SimpleTypeTests
+
+
+- (void)testProperty {
+//    Class cls = TestObject.superclass;;
+//    while (cls) {
+//        cls = cls.superclass;
+//        NSLog(@"%@", cls);
+//    }
+    
+//    TestObject *object = [[TestObject alloc] init];
+    NSLog(@"%@", [TestObject propertys]);
+    NSLog(@"%@", [TestObject propertysWithTypes]);
+}
+
+- (void)testObject {
+    NSString *jsonString = @"{\
+    \"date1\" : \"2015/07/11\",\
+    \"date2\" : \"2015.05.29\",\
+    \"content_detail\" : \"this is a detail\",\
+    \"test\" : \"Hello world\"\
+    }";
+    TestObject *object = [TestObject objectFromJsonDict:[jsonString toJsonDictionary]];
+    NSLog(@"jsonString: %@", jsonString);
+    NSLog(@"jsonObject: %@", object);
+}
 
 - (void)testSimpleType {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"simple_type" ofType:@"json"];

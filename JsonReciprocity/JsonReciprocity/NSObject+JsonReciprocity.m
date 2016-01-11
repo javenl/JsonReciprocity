@@ -10,53 +10,67 @@
 #import "NSMutableDictionary+SafeSet.h"
 #import "JsonSerialization.h"
 #import <objc/runtime.h>
-
-#if DEBUG
-#define JRLog(format,...) NSLog(format, ##__VA_ARGS__)
-#else
-#define JRLog(format,...)
-#endif
+#import "JsonReciprocityManager.h"
 
 @implementation NSObject (JsonReciprocity)
 
-- (NSDictionary *)propertysWithTypes {
++ (NSDictionary *)propertysWithTypes {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    unsigned int propertyCount = 0;
-    Ivar *ivars = class_copyIvarList([self class], &propertyCount);
-    for (unsigned int i = 0; i < propertyCount; ++i) {
-        Ivar var = ivars[i];
-        NSString *type = [NSString stringWithUTF8String:ivar_getTypeEncoding(var)];
-        NSString *name = [NSString stringWithUTF8String:ivar_getName(var)];
-        if ([name hasPrefix:@"_"]) {
-//            name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
-            name = [name substringFromIndex:1];
+    Class cls = [self class];
+    while (cls && ![cls isEqual:[NSObject class]]) {
+        unsigned int propertyCount = 0;
+        Ivar *ivars = class_copyIvarList(cls, &propertyCount);
+        for (unsigned int i = 0; i < propertyCount; ++i) {
+            Ivar var = ivars[i];
+            NSString *type = [NSString stringWithUTF8String:ivar_getTypeEncoding(var)];
+            NSString *name = [NSString stringWithUTF8String:ivar_getName(var)];
+            if ([name hasPrefix:@"_"]) {
+                //                name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
+                name = [name substringFromIndex:1];
+            }
+            if ([type hasPrefix:@"@"]) {
+                type = [type stringByReplacingOccurrencesOfString:@"@" withString:@""];
+                type = [type stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            } else { // not an object
+                type = @"";
+            }
+            [dict safeSetObject:type forKey:name];
         }
-        if ([type hasPrefix:@"@"]) {
-            type = [type stringByReplacingOccurrencesOfString:@"@" withString:@""];
-            type = [type stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        } else {
-            type = @"";
-        }
-        [dict safeSetObject:type forKey:name];
-	}
-    free(ivars);
+        free(ivars);
+        cls = [cls superclass];
+    }
     return dict;
 }
 
-- (NSArray *)propertys {
-    NSMutableArray *propertyNamesArray = [NSMutableArray array];
-    unsigned int propertyCount = 0;
-    objc_property_t *properties = class_copyPropertyList([self class], &propertyCount);
-    for (unsigned int i = 0; i < propertyCount; ++i) {
-		objc_property_t property = properties[i];
-		const char * name = property_getName(property);
-		[propertyNamesArray addObject:[NSString stringWithUTF8String:name]];
-	}
-	free(properties);
-    return propertyNamesArray;
++ (NSArray *)propertys {
+    return [self propertysIgnoreDefault:YES];
 }
 
-- (NSDictionary *)propertyDict {
++ (NSArray *)propertysIgnoreDefault:(BOOL)ignore {
+    NSMutableSet *propertySet = [NSMutableSet set];
+    Class cls = [self class];
+    while (cls && ![cls isEqual:[NSObject class]]) {
+        unsigned int propertyCount = 0;
+        objc_property_t *properties = class_copyPropertyList(cls, &propertyCount);
+        for (unsigned int i = 0; i < propertyCount; ++i) {
+            objc_property_t property = properties[i];
+            const char *cname = property_getName(property);
+            NSString *name = [NSString stringWithUTF8String:cname];
+            if (ignore) { // ignore default propertys
+                if ([name isEqualToString:@"description"] || [name isEqualToString:@"debugDescription"] ||
+                    [name isEqualToString:@"hash"] || [name isEqualToString:@"superclass"]) {
+                    continue;
+                }
+            }
+            [propertySet addObject:name];
+        }
+        free(properties);
+        cls = [cls superclass];
+    }
+    return propertySet.allObjects;
+}
+
++ (NSDictionary *)propertyDict {
     NSArray *propertys = [self propertys];
     NSMutableDictionary *propertyDict = [[NSMutableDictionary alloc] init];
     for (NSString *property in propertys) {
@@ -68,15 +82,20 @@
 #pragma mark - Object -> NSDictionary
 
 - (NSDictionary *)toJsonDictionary {
+    return [self toJsonDictionaryIgnoreNullKey:YES];
+}
+
+- (NSDictionary *)toJsonDictionaryIgnoreNullKey:(BOOL)isIgnoreNullKey {
     NSMutableDictionary *propertyDict = [NSMutableDictionary dictionary];
-    NSArray *propertys = [self propertys];
+    NSArray *propertys = [[self class] propertys];
     for (NSString *property in propertys) {
-        if (![property isEqualToString:@"superclass"] &&
-            ![property isEqualToString:@"hash"] &&
-            ![property isEqualToString:@"description"] &&
-            ![property isEqualToString:@"debugDescription"]) {//忽略一些关键字
-            id value = [NSObject getObjectInternal:[self valueForKey:property]];
-            [propertyDict safeSetObject:value forKey:property placeHolderObject:[NSNull null]];
+        id value = [NSObject getObjectInternal:[self valueForKey:property]];
+        if (value) {
+            [propertyDict setObject:value forKey:property];
+        } else {
+            if (!isIgnoreNullKey) {
+                [propertyDict setObject:[NSNull null] forKey:property];
+            }
         }
     }
     return propertyDict;
@@ -94,7 +113,7 @@
     if([obj isKindOfClass:[NSURL class]]) {
         return [obj absoluteString];
     }
-
+    
     if([obj isKindOfClass:[NSArray class]]) {
         NSArray *objArray = obj;
         NSMutableArray *arr = [NSMutableArray arrayWithCapacity:objArray.count];
@@ -103,7 +122,7 @@
         }
         return arr;
     }
-
+    
     if([obj isKindOfClass:[NSDictionary class]]) {
         NSDictionary *objDict = obj;
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:[objDict count]];
@@ -124,14 +143,14 @@
 
 + (id)objectFromJsonDict:(NSDictionary *)jsonDict dataDictKeys:(NSArray *)dataDictKeys object:(id)object objectPropertyTypes:(NSDictionary *)objectPropertyTypes {
     NSAssert([jsonDict isKindOfClass:[NSDictionary class]], @"JsonDict Is Not Type Of NSDictionary");
-
+    
     object = object ? object : [[self alloc] init];
-
+    
     dataDictKeys = dataDictKeys ? dataDictKeys : [jsonDict allKeys];
-
+    
     NSDictionary *referDict = [self globalReferDict];
-
-    objectPropertyTypes = objectPropertyTypes ? objectPropertyTypes : [object propertysWithTypes];
+    
+    objectPropertyTypes = objectPropertyTypes ? objectPropertyTypes : [self propertysWithTypes];
     
     for (NSString *key in dataDictKeys) {
         
@@ -152,8 +171,8 @@
             propertyKey = key;
         }
         
-        if ([object respondsToSelector:@selector(isIgnorePropertyKey:)]) {
-            if ([object isIgnorePropertyKey:propertyKey]) {
+        if ([self respondsToSelector:@selector(isIgnorePropertyKey:)]) {
+            if ([self isIgnorePropertyKey:propertyKey]) {
                 continue;
             }
         }
@@ -164,14 +183,19 @@
             continue;
         }
         
-        if ([object respondsToSelector:@selector(customFormat:value:)]) {
-            value = [object customFormat:propertyKey value:value];
-            [object setValue:value forKey:propertyKey];
-            continue;
+        // 自定义数据
+        if ([self respondsToSelector:@selector(customFormat:value:)]) {
+            id customValue = [self customFormat:propertyKey value:value];
+            //            NSLog(@"%@", @(!customValue));
+            if (customValue) {
+                [object setValue:customValue forKey:propertyKey];
+                continue;
+            }
         }
         
-        if (className.length > 0) {
-            //特殊基础类型
+        //
+        if (className.length > 0) { // 是类对象
+            // 特殊的基本类对象
             if ([className isEqualToString:@"NSDate"]) {//NSDate 用dateWithTimeIntervalSince1970初始化
                 if ([value isKindOfClass:[NSNumber class]]) {
                     value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
@@ -192,12 +216,12 @@
             
             if ([property isSupportedClasses] || [property isKindOfClass:[NSDictionary class]]) { //基础类型和字典直接设值
                 
-//                if ([property isKindOfClass:[NSDate class]]) {
-//                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
-//                }
-//                if ([property isKindOfClass:[NSURL class]]) {
-//                    value = [NSURL URLWithString:value];
-//                }
+                //                if ([property isKindOfClass:[NSDate class]]) {
+                //                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
+                //                }
+                //                if ([property isKindOfClass:[NSURL class]]) {
+                //                    value = [NSURL URLWithString:value];
+                //                }
                 
                 [object setValue:value forKey:propertyKey];
                 
@@ -219,9 +243,9 @@
                 NSDictionary *objectPropertyTypes =  [propertyClass globalObjectPropertyTypes];
                 id realValue = [propertyClass objectFromJsonDict:value dataDictKeys:dataDictKeys object:nil objectPropertyTypes:objectPropertyTypes];
                 [object setValue:realValue forKey:propertyKey];
-
+                
             }
-        } else { // 无类型的
+        } else { // 非类对象（基本类型 int float 之类）直接赋值
             [object setValue:value forKey:propertyKey];
         }
     }
@@ -238,9 +262,9 @@
         if ([data isKindOfClass:[NSArray class]]) {
             result = [self objectArrayFromJsonArray:data];
         } else if ([data isKindOfClass:[NSDictionary class]]) {
-            NSArray *dataDictKeys = [self globalKeysWithDict:data];
+//            NSArray *dataDictKeys = [self globalKeysWithDict:data];
             NSDictionary *objectPropertyTypes =  [self globalObjectPropertyTypes];
-            result = [self objectFromJsonDict:data dataDictKeys:dataDictKeys object:nil objectPropertyTypes:objectPropertyTypes];
+            result = [self objectFromJsonDict:data dataDictKeys:nil object:nil objectPropertyTypes:objectPropertyTypes];
         } else {
             result = data;
         }
@@ -330,8 +354,7 @@
     }
     NSString *className = NSStringFromClass([self class]);
     if (!globalPropertyDict[className]) {
-        id object = [[self alloc] init];
-        globalPropertyDict[className] = [object propertysWithTypes];
+        globalPropertyDict[className] = [self propertysWithTypes];
         return globalPropertyDict[className];
     } else {
         return globalPropertyDict[className];

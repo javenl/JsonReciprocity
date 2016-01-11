@@ -5,5 +5,6 @@
     "expride_time": 1430647083,
     "lastDate":1430647083,
     "qiche":"car",
-    "__camel___CASE__tEST__": "this is string"
+    "__camel___CASE__tEST__": "this is string",
+    "upper_case": "upper"
 }

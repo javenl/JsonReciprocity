@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A15AB861BFAF5A1009EF70E /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A15AB851BFAF5A1009EF70E /* BaseObject.m */; };
 		5A320DD31B528B180071F850 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A320DD21B528B180071F850 /* TestObject.m */; };
 		5A4B5A261B8D81DD00FC6BA8 /* CustomTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B5A251B8D81DD00FC6BA8 /* CustomTests.m */; };
 		5A4B5A291B8D834600FC6BA8 /* CustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A4B5A281B8D834600FC6BA8 /* CustomObject.m */; };
+		5A690E431BFC9940002B42FD /* JsonReciprocityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A690E421BFC9940002B42FD /* JsonReciprocityManager.m */; };
 		5AE4670D1B4E175400957C31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4670C1B4E175400957C31 /* main.m */; };
 		5AE467101B4E175400957C31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE4670F1B4E175400957C31 /* AppDelegate.m */; };
 		5AE467131B4E175400957C31 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE467121B4E175400957C31 /* ViewController.m */; };
@@ -62,11 +64,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A15AB841BFAF5A1009EF70E /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
+		5A15AB851BFAF5A1009EF70E /* BaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseObject.m; sourceTree = "<group>"; };
 		5A320DD11B528B180071F850 /* TestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObject.h; sourceTree = "<group>"; };
 		5A320DD21B528B180071F850 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 		5A4B5A251B8D81DD00FC6BA8 /* CustomTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTests.m; sourceTree = "<group>"; };
 		5A4B5A271B8D834600FC6BA8 /* CustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomObject.h; sourceTree = "<group>"; };
 		5A4B5A281B8D834600FC6BA8 /* CustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomObject.m; sourceTree = "<group>"; };
+		5A690E411BFC9940002B42FD /* JsonReciprocityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonReciprocityManager.h; sourceTree = "<group>"; };
+		5A690E421BFC9940002B42FD /* JsonReciprocityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonReciprocityManager.m; sourceTree = "<group>"; };
 		5AE467071B4E175400957C31 /* JsonReciprocity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonReciprocity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE4670B1B4E175400957C31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AE4670C1B4E175400957C31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 		5AE467301B4E177200957C31 /* JsonReciprocity */ = {
 			isa = PBXGroup;
 			children = (
+				5A690E411BFC9940002B42FD /* JsonReciprocityManager.h */,
+				5A690E421BFC9940002B42FD /* JsonReciprocityManager.m */,
 				5AE467311B4E177200957C31 /* JsonDeserialization.h */,
 				5AE467321B4E177200957C31 /* JsonDeserializstion.m */,
 				5AE467331B4E177200957C31 /* JsonReciprocity.h */,
@@ -254,6 +262,8 @@
 				5AE467441B4E177700957C31 /* PersonModel.m */,
 				5A320DD11B528B180071F850 /* TestObject.h */,
 				5A320DD21B528B180071F850 /* TestObject.m */,
+				5A15AB841BFAF5A1009EF70E /* BaseObject.h */,
+				5A15AB851BFAF5A1009EF70E /* BaseObject.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -449,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AE467471B4E177700957C31 /* PersonModel.m in Sources */,
+				5A15AB861BFAF5A1009EF70E /* BaseObject.m in Sources */,
 				5AE467131B4E175400957C31 /* ViewController.m in Sources */,
 				5AE467101B4E175400957C31 /* AppDelegate.m in Sources */,
 				5AE4670D1B4E175400957C31 /* main.m in Sources */,
@@ -456,6 +467,7 @@
 				5AE4673B1B4E177200957C31 /* JsonSerialization.m in Sources */,
 				5AE467451B4E177700957C31 /* CarModel.m in Sources */,
 				5AE4673D1B4E177200957C31 /* NSObject+JsonReciprocity.m in Sources */,
+				5A690E431BFC9940002B42FD /* JsonReciprocityManager.m in Sources */,
 				5AE467461B4E177700957C31 /* HouseModel.m in Sources */,
 				5AE4673A1B4E177200957C31 /* JsonDeserializstion.m in Sources */,
 				5AE4673C1B4E177200957C31 /* NSMutableDictionary+SafeSet.m in Sources */,
