@@ -82,17 +82,21 @@
 #pragma mark - Object -> NSDictionary
 
 - (NSDictionary *)toJsonDictionary {
+    return [self toJsonDictionaryIgnoreNullKey:YES];
+}
+
+- (NSDictionary *)toJsonDictionaryIgnoreNullKey:(BOOL)isIgnoreNullKey {
     NSMutableDictionary *propertyDict = [NSMutableDictionary dictionary];
     NSArray *propertys = [[self class] propertys];
     for (NSString *property in propertys) {
         id value = [NSObject getObjectInternal:[self valueForKey:property]];
-        [propertyDict safeSetObject:value forKey:property placeHolderObject:[NSNull null]];
-        //        if (![property isEqualToString:@"superclass"] &&
-        //            ![property isEqualToString:@"hash"] &&
-        //            ![property isEqualToString:@"description"] &&
-        //            ![property isEqualToString:@"debugDescription"]) {//忽略一些关键字
-        //
-        //        }
+        if (value) {
+            [propertyDict setObject:value forKey:property];
+        } else {
+            if (!isIgnoreNullKey) {
+                [propertyDict setObject:[NSNull null] forKey:property];
+            }
+        }
     }
     return propertyDict;
 }
@@ -258,9 +262,9 @@
         if ([data isKindOfClass:[NSArray class]]) {
             result = [self objectArrayFromJsonArray:data];
         } else if ([data isKindOfClass:[NSDictionary class]]) {
-            NSArray *dataDictKeys = [self globalKeysWithDict:data];
+//            NSArray *dataDictKeys = [self globalKeysWithDict:data];
             NSDictionary *objectPropertyTypes =  [self globalObjectPropertyTypes];
-            result = [self objectFromJsonDict:data dataDictKeys:dataDictKeys object:nil objectPropertyTypes:objectPropertyTypes];
+            result = [self objectFromJsonDict:data dataDictKeys:nil object:nil objectPropertyTypes:objectPropertyTypes];
         } else {
             result = data;
         }

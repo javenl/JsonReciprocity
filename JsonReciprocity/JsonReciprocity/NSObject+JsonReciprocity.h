@@ -45,6 +45,8 @@
  */
 - (NSDictionary *)toJsonDictionary;
 
+- (NSDictionary *)toJsonDictionaryIgnoreNullKey:(BOOL)isIgnoreNullKey;
+
 /**
  *  NSDictionary -> Object
  */
