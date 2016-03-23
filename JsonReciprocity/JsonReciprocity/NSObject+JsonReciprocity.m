@@ -246,7 +246,12 @@
                 
             }
         } else { // 非类对象（基本类型 int float 之类）直接赋值
-            [object setValue:value forKey:propertyKey];
+            if (!value) {
+                [object setValue:@(0) forKey:propertyKey];
+            } else {
+                [object setValue:value forKey:propertyKey];
+            }
+
         }
     }
     return object;

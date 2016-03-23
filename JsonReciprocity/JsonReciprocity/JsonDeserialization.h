@@ -10,6 +10,8 @@
 
 @interface NSString (JsonDeserialization)
 
+- (id)toJsonObject;
+
 - (NSArray *)toJsonArray;
 
 - (NSMutableArray *)toJsonMutableArray;
