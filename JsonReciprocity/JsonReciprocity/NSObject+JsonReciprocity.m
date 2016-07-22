@@ -334,23 +334,35 @@
 #pragma mark - Memory Cache To Accelerate
 
 + (NSArray *)globalKeysWithDict:(NSDictionary *)dict {
-    static NSMutableDictionary *globalKeyDict = nil;
-    @synchronized (self) {
-        if (globalKeyDict == nil) {
-            globalKeyDict = [NSMutableDictionary dictionary];
-        }
-    }
+    NSMutableDictionary *globalKeyDict = [NSMutableDictionary dictionary];
+    NSArray *dataDictKeys = [dict allKeys];
     NSString *className = NSStringFromClass([self class]);
-    if (!globalKeyDict[className]) {
-        NSArray *dataDictKeys = [dict allKeys];
-        globalKeyDict[className] = dataDictKeys;
-        return globalKeyDict[className];
-    } else {
-        return globalKeyDict[className];
-    }
+    globalKeyDict[className] = dataDictKeys;
+    return globalKeyDict[className];
+
+//    static NSMutableDictionary *globalKeyDict = nil;
+//    @synchronized (self) {
+//        if (globalKeyDict == nil) {
+//            globalKeyDict = [NSMutableDictionary dictionary];
+//        }
+//    }
+//    NSString *className = NSStringFromClass([self class]);
+//    if (!globalKeyDict[className]) {
+//        NSArray *dataDictKeys = [dict allKeys];
+//        globalKeyDict[className] = dataDictKeys;
+//        return globalKeyDict[className];
+//    } else {
+//        return globalKeyDict[className];
+//    }
 }
 
 + (NSDictionary *)globalObjectPropertyTypes {
+    NSMutableDictionary *globalPropertyDict = [NSMutableDictionary dictionary];
+    NSString *className = NSStringFromClass([self class]);
+    globalPropertyDict[className] = [self propertysWithTypes];
+    return globalPropertyDict[className];
+        
+    /*
     static NSMutableDictionary *globalPropertyDict = nil;
     @synchronized (self) {
         if (globalPropertyDict == nil) {
@@ -364,6 +376,7 @@
     } else {
         return globalPropertyDict[className];
     }
+    */
 }
 
 + (NSDictionary *)globalReferDict {
