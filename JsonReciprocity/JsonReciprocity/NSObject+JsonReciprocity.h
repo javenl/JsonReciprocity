@@ -12,9 +12,21 @@
 @optional
 
 /**
+ * 转换之前可以修改源字典的数据
+ */
++ (NSDictionary *)convertDictFromSourceDict:(NSDictionary *)dict;
+
+/**
+ * 转换成对象之后可以修改对象某些值
+ */
++ (id)finalObjectFromConvertedObject:(id)object;
+
+/**
  * 自定义映射值
  */
 + (id)customFormat:(NSString *)keyPath value:(id)value;
+
++ (id)customFormat:(NSString *)keyPath value:(id)value objectClassName:(NSString *)objectClassName;
 
 /**
  * 是否需要忽略某些字段，默认为 NO

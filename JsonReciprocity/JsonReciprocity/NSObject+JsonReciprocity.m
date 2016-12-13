@@ -138,7 +138,8 @@
 #pragma mark - NSDictionary -> Object
 
 + (id)objectFromJsonDict:(NSDictionary *)dataDict {
-    return [self objectFromJsonDict:dataDict dataDictKeys:nil object:nil objectPropertyTypes:nil];
+    id object = [self objectFromJsonDict:dataDict dataDictKeys:nil object:nil objectPropertyTypes:nil];
+    return object;
 }
 
 + (id)objectFromJsonDict:(NSDictionary *)jsonDict dataDictKeys:(NSArray *)dataDictKeys object:(id)object objectPropertyTypes:(NSDictionary *)objectPropertyTypes {
@@ -146,7 +147,15 @@
     
     object = object ? object : [[self alloc] init];
     
-    dataDictKeys = dataDictKeys ? dataDictKeys : [jsonDict allKeys];
+    NSDictionary *converDict = nil;
+    
+    if ([self respondsToSelector:@selector(convertDictFromSourceDict:)]) {
+        converDict = [self convertDictFromSourceDict:jsonDict];
+    } else {
+        converDict = jsonDict;
+    }
+    
+    dataDictKeys = dataDictKeys ? dataDictKeys : [converDict allKeys];
     
     NSDictionary *referDict = [self globalReferDict];
     
@@ -155,7 +164,7 @@
     for (NSString *key in dataDictKeys) {
         
         //source
-        id value = jsonDict[key];
+        id value = converDict[key];
         if ([value isKindOfClass:[NSNull class]]) {
             continue;
         }
@@ -184,7 +193,13 @@
         }
         
         // 自定义数据
-        if ([self respondsToSelector:@selector(customFormat:value:)]) {
+        if ([self respondsToSelector:@selector(customFormat:value:objectClassName:)]) {
+            id customValue = [self customFormat:propertyKey value:value objectClassName:className];
+            if (customValue) {
+                [object setValue:customValue forKey:propertyKey];
+                continue;
+            }
+        } else if ([self respondsToSelector:@selector(customFormat:value:)]) {
             id customValue = [self customFormat:propertyKey value:value];
             //            NSLog(@"%@", @(!customValue));
             if (customValue) {
@@ -254,7 +269,15 @@
 
         }
     }
-    return object;
+    
+    id finalObject = nil;
+    if ([self respondsToSelector:@selector(finalObjectFromConvertedObject:)]) {
+        finalObject = [self finalObjectFromConvertedObject:object];
+    } else {
+        finalObject = object;
+    }
+    
+    return finalObject;
 }
 
 #pragma mark - JsonArray -> ObjectArray
