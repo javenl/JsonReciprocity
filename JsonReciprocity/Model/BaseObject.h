@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) NSDate *date1;
 @property (strong, nonatomic) NSDate *date2;
+@property (strong, nonatomic) NSDate *date3;
 
 @property (strong, nonatomic) NSString *str;
 @property (assign, nonatomic) int x;

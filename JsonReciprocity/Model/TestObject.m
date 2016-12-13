@@ -15,12 +15,27 @@
 }
 
 + (BOOL)isIgnorePropertyKey:(NSString *)key {
-    if ([key isEqualToString:@"test"]) {
+    if ([key isEqualToString:@"test2"]) {
         return YES;
     }
     return NO;
 }
 
++ (id)customFormat:(NSString *)keyPath value:(id)value objectClassName:(NSString *)objectClassName {
+    if ([keyPath isEqualToString:@"date1"]) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy/MM/dd";
+        NSDate *date = [formatter dateFromString:value];
+        return date;
+    } else if ([objectClassName isEqualToString:@"NSDate"]) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy.MM.dd";
+        NSDate *date = [formatter dateFromString:value];
+        return date;
+    }
+    return nil;
+}
+/*
 - (id)customFormat:(NSString *)keyPath value:(id)value {
     if ([keyPath isEqualToString:@"date1"]) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -34,6 +49,17 @@
         return date;
     }
     return value;
+}
+*/
++ (NSDictionary *)convertDictFromSourceDict:(NSDictionary *)dict {
+    NSMutableDictionary *convertDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    [convertDict setObject:@"I change the converDict before convert" forKey:@"test"];
+    return [convertDict copy];
+}
+
++ (id)finalObjectFromConvertedObject:(TestObject *)object {
+    object.test2 = @"I change the value after convert";
+    return object;
 }
 
 - (NSString *)description {

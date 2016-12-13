@@ -62,6 +62,8 @@
     self.btn8 = [self btnWithTitle:@"JsonReciprocityDelegateTest" target:self action:@selector(jsonReciprocityDelegateDemo)];
     self.btn8.frame = CGRectMake(0, 64+60*7, CGRectGetWidth(self.view.frame), 40);
     [self.view addSubview:self.btn8];
+    
+    
 }
 
 - (UIButton *)btnWithTitle:(NSString *)title target:(id)target action:(SEL)action {
@@ -284,8 +286,10 @@
     NSString *jsonString = @"{\
         \"date1\" : \"2015/07/11\",\
         \"date2\" : \"2015.05.29\",\
+        \"date3\" : \"2016.12.13\",\
         \"content_detail\" : \"this is a detail\",\
-        \"test\" : \"Hello world\"\
+        \"test\" : \"Hello world\",\
+        \"test2\" : \"Good Byt world\"\
     }";
     TestObject *object = [TestObject objectFromJsonDict:[jsonString toJsonDictionary]];
     NSLog(@"jsonString: %@", jsonString);

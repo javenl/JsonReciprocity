@@ -12,9 +12,7 @@
 
 @interface TestObject : BaseObject <JsonReciprocityDelegate>
 
-@property (strong, nonatomic) NSDate *date1;
-@property (strong, nonatomic) NSDate *date2;
-
-@property (strong, nonatomic) NSString *test;
+@property (nonatomic, copy) NSString *test;
+@property (nonatomic, copy) NSString *test2;
 
 @end
