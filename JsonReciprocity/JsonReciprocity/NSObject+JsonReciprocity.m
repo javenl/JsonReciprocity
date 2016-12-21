@@ -229,7 +229,13 @@
             Class propertyClass = NSClassFromString(className);
             id property = [[propertyClass alloc] init];
             
-            if ([property isSupportedClasses] || [property isKindOfClass:[NSDictionary class]]) { //基础类型和字典直接设值
+            if ([property isKindOfClass:[NSString class]]) { // 字符串类型
+                NSString *str = [[propertyClass alloc] initWithString:value];
+                [object setValue:str forKey:propertyKey];
+                continue;
+            }
+            
+            if ([property isKindOfClass:[NSNumber class]] || [property isKindOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
                 
                 //                if ([property isKindOfClass:[NSDate class]]) {
                 //                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
@@ -301,14 +307,14 @@
     return array;
 }
 
-- (BOOL)isSupportedClasses {
-    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:[NSNumber class]] //|| [self isKindOfClass:[NSDate class]] || [self isKindOfClass:[NSURL class]]
-        ) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
+//- (BOOL)isSupportedClasses {
+//    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:[NSNumber class]] //|| [self isKindOfClass:[NSDate class]] || [self isKindOfClass:[NSURL class]]
+//        ) {
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
 
 
 #pragma mark - Helper

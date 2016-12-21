@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "HouseModel.h"
 #import "JsonReciprocity.h"
+#import "TestString.h"
 
 @interface PersonModel : NSObject <JsonReciprocityDelegate>
 
 @property (nonatomic, assign) NSInteger id;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) CGFloat score;
 @property (nonatomic, strong) NSDate *registerDate;
 @property (nonatomic, assign) NSTimeInterval lastLoginTime;
