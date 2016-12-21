@@ -145,7 +145,7 @@
         \"tags\":[\
             \"nice\",\
             \"comfort\"\
-        ]}\
+        ]\
     },\
     \"cars\":[{\
         \"brand\":\"benz\",\
@@ -153,7 +153,6 @@
     }]\
     }";
     PersonModel *personModel = [PersonModel objectFromJsonDict:[jsonString toJsonDictionary]];
-    
     NSLog(@"jsonString: %@", jsonString);
     NSLog(@"jsonModel: %@", personModel);
 }
@@ -238,43 +237,51 @@
 
 - (void)jsonStringToJsonObjectArray {
     NSString *jsonString = @"\
-    [{\
+    [\
+      {\
         \"id\": 1420194,\
-        \"name\" : \"Jack\",\
-        \"score\" : 88.33,\
-        \"register_date\" : 1428647083,\
-        \"last_login_time\" : 1430642742,\
+        \"name\": \"Jack\",\
+        \"score\": 88.33,\
+        \"register_date\": 1428647083,\
+        \"last_login_time\": 1430642742,\
         \"house\": {\
-            \"address\": \"GuangZhou China\",\
-            \"area\": 95.6,\
-            \"tags\":[\
-                \"nice\",\
-                \"comfort\"\
-            ]}\
-        },\
-        \"cars\":[{\
-            \"brand\":\"benz\",\
-            \"num\":\"A14212\"\
-        }]\
-    },{\
-        \"id\": 1420194,\
-        \"name\" : \"Jack\",\
-        \"score\" : 88.33,\
-        \"register_date\" : 1428647083,\
-        \"last_login_time\" : 1430642742,\
-        \"house\": {\
-            \"address\": \"GuangZhou China\",\
-            \"area\": 95.6,\
-            \"tags\":[\
-                \"nice\",\
-                \"comfort\"\
-            ]}\
-        },\
-        \"cars\":[{\
-            \"brand\":\"benz\",\
-            \"num\":\"A14212\"\
-        }]\
-    }]";
+          \"address\": \"GuangZhou China\",\
+          \"area\": 95.6,\
+          \"tags\": [\
+            \"nice\",\
+            \"comfort\"\
+          ]\
+      },\
+      \"cars\": [\
+        {\
+          \"brand\": \"benz\",\
+          \"num\": \"A14212\"\
+        }\
+      ]\
+    },\
+    {\
+      \"id\": 1420194,\
+      \"name\": \"Jack\",\
+      \"score\": 88.33,\
+      \"register_date\": 1428647083,\
+      \"last_login_time\": 1430642742,\
+      \"house\": {\
+        \"address\": \"GuangZhou China\",\
+        \"area\": 95.6,\
+        \"tags\": [\
+          \"nice\",\
+          \"comfort\"\
+        ]\
+      },\
+      \"cars\": [\
+        {\
+          \"brand\": \"benz\",\
+          \"num\": \"A14212\"\
+        }\
+      ]\
+    }\
+    ]\
+    ";
     NSArray *personModels = [PersonModel objectArrayFromJsonArray:[jsonString toJsonArray]];
     NSLog(@"jsonString: %@", jsonString);
     NSLog(@"jsonObjects: %@", personModels);

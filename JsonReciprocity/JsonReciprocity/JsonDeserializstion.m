@@ -21,7 +21,7 @@
     }
 }
 
--(id)toJsonObject {
+- (id)toJsonObject {
     NSData* data = [self dataUsingEncoding:NSUTF8StringEncoding];
     NSError* error = nil;
     id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
