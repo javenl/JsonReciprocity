@@ -180,16 +180,20 @@
             propertyKey = key;
         }
         
-        if ([self respondsToSelector:@selector(isIgnorePropertyKey:)]) {
-            if ([self isIgnorePropertyKey:propertyKey]) {
-                continue;
-            }
-        }
-        
         NSString *className = objectPropertyTypes[propertyKey];
         if (className == nil) {
             JRLog(@"No Propertykey %@ In %@", propertyKey, NSStringFromClass(self));
             continue;
+        }
+        
+        if ([self respondsToSelector:@selector(isIgnorePropertyKey:)]) {
+            if ([self isIgnorePropertyKey:propertyKey]) {
+                continue;
+            }
+        } else if ([self respondsToSelector:@selector(isIgnorePropertyKey:objectClassName:)]) {
+            if ([self isIgnorePropertyKey:propertyKey objectClassName:className]) {
+                continue;
+            }
         }
         
         // 自定义数据
@@ -227,15 +231,20 @@
             }
             
             Class propertyClass = NSClassFromString(className);
-            id property = [[propertyClass alloc] init];
+            //            id property = [[propertyClass alloc] init];
             
-            if ([property isKindOfClass:[NSString class]]) { // 字符串类型
-                NSString *str = [[propertyClass alloc] initWithString:value];
+            if ([propertyClass isSubclassOfClass:[NSString class]]) { // 字符串类型
+                NSString *str = nil;
+                if ([value isKindOfClass:[NSNumber class]]) { //兼容数字转字符串
+                    str = [NSString stringWithFormat:@"%@", value];
+                } else {
+                    str = [[propertyClass alloc] initWithString:value];
+                }
                 [object setValue:str forKey:propertyKey];
                 continue;
             }
             
-            if ([property isKindOfClass:[NSNumber class]] || [property isKindOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
+            if ([propertyClass isSubclassOfClass:[NSNumber class]] || [propertyClass isSubclassOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
                 
                 //                if ([property isKindOfClass:[NSDate class]]) {
                 //                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
@@ -246,7 +255,7 @@
                 
                 [object setValue:value forKey:propertyKey];
                 
-            } else if ([property isKindOfClass:[NSArray class]]) { //数组需要递归
+            } else if ([propertyClass isSubclassOfClass:[NSArray class]]) { //数组需要递归
                 
                 NSDictionary *classDict = [self classReferenceDictForArray];
                 if (classDict[propertyKey]) {
@@ -272,7 +281,7 @@
             } else {
                 [object setValue:value forKey:propertyKey];
             }
-
+            
         }
     }
     
@@ -289,14 +298,22 @@
 #pragma mark - JsonArray -> ObjectArray
 
 + (NSMutableArray *)objectArrayFromJsonArray:(NSArray *)jsonArray {
-    NSAssert([jsonArray isKindOfClass:[NSArray class]], @"JsonArray Is Not Kind Of NSArray");
+    if (![jsonArray isKindOfClass:[NSArray class]]) {
+        @try {
+            NSAssert([jsonArray isKindOfClass:[NSArray class]], @"JsonArray Is Not Kind Of NSArray");
+        }
+        @catch (NSException *exception) {
+            
+        }
+        return nil;
+    }
     NSMutableArray *array = [NSMutableArray array];
     for (id data in jsonArray) {
         id result = nil;
         if ([data isKindOfClass:[NSArray class]]) {
             result = [self objectArrayFromJsonArray:data];
         } else if ([data isKindOfClass:[NSDictionary class]]) {
-//            NSArray *dataDictKeys = [self globalKeysWithDict:data];
+            //            NSArray *dataDictKeys = [self globalKeysWithDict:data];
             NSDictionary *objectPropertyTypes =  [self globalObjectPropertyTypes];
             result = [self objectFromJsonDict:data dataDictKeys:nil object:nil objectPropertyTypes:objectPropertyTypes];
         } else {
@@ -368,21 +385,21 @@
     NSString *className = NSStringFromClass([self class]);
     globalKeyDict[className] = dataDictKeys;
     return globalKeyDict[className];
-
-//    static NSMutableDictionary *globalKeyDict = nil;
-//    @synchronized (self) {
-//        if (globalKeyDict == nil) {
-//            globalKeyDict = [NSMutableDictionary dictionary];
-//        }
-//    }
-//    NSString *className = NSStringFromClass([self class]);
-//    if (!globalKeyDict[className]) {
-//        NSArray *dataDictKeys = [dict allKeys];
-//        globalKeyDict[className] = dataDictKeys;
-//        return globalKeyDict[className];
-//    } else {
-//        return globalKeyDict[className];
-//    }
+    
+    //    static NSMutableDictionary *globalKeyDict = nil;
+    //    @synchronized (self) {
+    //        if (globalKeyDict == nil) {
+    //            globalKeyDict = [NSMutableDictionary dictionary];
+    //        }
+    //    }
+    //    NSString *className = NSStringFromClass([self class]);
+    //    if (!globalKeyDict[className]) {
+    //        NSArray *dataDictKeys = [dict allKeys];
+    //        globalKeyDict[className] = dataDictKeys;
+    //        return globalKeyDict[className];
+    //    } else {
+    //        return globalKeyDict[className];
+    //    }
 }
 
 + (NSDictionary *)globalObjectPropertyTypes {
@@ -390,22 +407,22 @@
     NSString *className = NSStringFromClass([self class]);
     globalPropertyDict[className] = [self propertysWithTypes];
     return globalPropertyDict[className];
-        
+    
     /*
-    static NSMutableDictionary *globalPropertyDict = nil;
-    @synchronized (self) {
-        if (globalPropertyDict == nil) {
-            globalPropertyDict = [NSMutableDictionary dictionary];
-        }
-    }
-    NSString *className = NSStringFromClass([self class]);
-    if (!globalPropertyDict[className]) {
-        globalPropertyDict[className] = [self propertysWithTypes];
-        return globalPropertyDict[className];
-    } else {
-        return globalPropertyDict[className];
-    }
-    */
+     static NSMutableDictionary *globalPropertyDict = nil;
+     @synchronized (self) {
+     if (globalPropertyDict == nil) {
+     globalPropertyDict = [NSMutableDictionary dictionary];
+     }
+     }
+     NSString *className = NSStringFromClass([self class]);
+     if (!globalPropertyDict[className]) {
+     globalPropertyDict[className] = [self propertysWithTypes];
+     return globalPropertyDict[className];
+     } else {
+     return globalPropertyDict[className];
+     }
+     */
 }
 
 + (NSDictionary *)globalReferDict {

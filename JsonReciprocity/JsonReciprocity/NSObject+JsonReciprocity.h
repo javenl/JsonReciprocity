@@ -33,6 +33,8 @@
  */
 + (BOOL)isIgnorePropertyKey:(NSString *)key;
 
++ (BOOL)isIgnorePropertyKey:(NSString *)key objectClassName:(NSString *)objectClassName;
+
 /**
  * 自定义映射字典
  */
