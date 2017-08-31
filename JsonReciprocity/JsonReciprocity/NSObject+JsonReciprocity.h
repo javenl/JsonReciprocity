@@ -82,3 +82,11 @@
 + (NSArray *)propertys;
 
 @end
+
+@interface NSString (JsonReciprocity)
+
++ (NSString *)camelCaseFromUnderscoreCase:(NSString *)underscoreCase;
+
++ (NSString *)underscoreCaseFromCamelCase:(NSString *)camelCase;
+
+@end

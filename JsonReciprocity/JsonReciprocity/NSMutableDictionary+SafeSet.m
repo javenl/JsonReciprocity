@@ -11,6 +11,9 @@
 @implementation NSMutableDictionary (SafeSet)
 
 - (void)safeSetObject:(id)object forKey:(NSString *)key placeHolderObject:(id)placeHolder {
+    if (!key) {
+        return;
+    }
     if (object) {
         self[key] = object;
     } else if (placeHolder) {

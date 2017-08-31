@@ -175,7 +175,7 @@
             propertyKey = referDict[key];
         } else if([self autoUpperCaseToCamelCase]) {
             //下划线转驼峰
-            propertyKey = [self camelCaseFromUnderscoreCase:key];
+            propertyKey = [NSString camelCaseFromUnderscoreCase:key];
         } else {
             propertyKey = key;
         }
@@ -231,9 +231,9 @@
             }
             
             Class propertyClass = NSClassFromString(className);
-            //            id property = [[propertyClass alloc] init];
+            id property = [[propertyClass alloc] init];
             
-            if ([propertyClass isSubclassOfClass:[NSString class]]) { // 字符串类型
+            if ([property isKindOfClass:[NSString class]]) { // 字符串类型
                 NSString *str = nil;
                 if ([value isKindOfClass:[NSNumber class]]) { //兼容数字转字符串
                     str = [NSString stringWithFormat:@"%@", value];
@@ -244,7 +244,7 @@
                 continue;
             }
             
-            if ([propertyClass isSubclassOfClass:[NSNumber class]] || [propertyClass isSubclassOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
+            if ([property isKindOfClass:[NSNumber class]] || [property isKindOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
                 
                 //                if ([property isKindOfClass:[NSDate class]]) {
                 //                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
@@ -255,7 +255,7 @@
                 
                 [object setValue:value forKey:propertyKey];
                 
-            } else if ([propertyClass isSubclassOfClass:[NSArray class]]) { //数组需要递归
+            } else if ([property isKindOfClass:[NSArray class]]) { //数组需要递归
                 
                 NSDictionary *classDict = [self classReferenceDictForArray];
                 if (classDict[propertyKey]) {
@@ -268,7 +268,7 @@
             } else { //对象类型尝试映射
                 
                 Class propertyClass = NSClassFromString(className);
-                NSAssert([value isKindOfClass:[NSDictionary class]], @"Can not exchange %@ to %@",NSStringFromClass(propertyClass), NSStringFromClass([value class]));
+                NSAssert([value isKindOfClass:[NSDictionary class]], @" ****  Property [%@] can not exchange %@ to %@ ***** ",propertyKey,NSStringFromClass(propertyClass), NSStringFromClass([value class]));
                 NSArray *dataDictKeys = [propertyClass globalKeysWithDict:value];
                 NSDictionary *objectPropertyTypes =  [propertyClass globalObjectPropertyTypes];
                 id realValue = [propertyClass objectFromJsonDict:value dataDictKeys:dataDictKeys object:nil objectPropertyTypes:objectPropertyTypes];
@@ -281,7 +281,7 @@
             } else {
                 [object setValue:value forKey:propertyKey];
             }
-            
+
         }
     }
     
@@ -303,7 +303,7 @@
             NSAssert([jsonArray isKindOfClass:[NSArray class]], @"JsonArray Is Not Kind Of NSArray");
         }
         @catch (NSException *exception) {
-            
+
         }
         return nil;
     }
@@ -313,7 +313,7 @@
         if ([data isKindOfClass:[NSArray class]]) {
             result = [self objectArrayFromJsonArray:data];
         } else if ([data isKindOfClass:[NSDictionary class]]) {
-            //            NSArray *dataDictKeys = [self globalKeysWithDict:data];
+//            NSArray *dataDictKeys = [self globalKeysWithDict:data];
             NSDictionary *objectPropertyTypes =  [self globalObjectPropertyTypes];
             result = [self objectFromJsonDict:data dataDictKeys:nil object:nil objectPropertyTypes:objectPropertyTypes];
         } else {
@@ -335,6 +335,92 @@
 
 
 #pragma mark - Helper
+
+
+
+#pragma mark - Override
+
++ (BOOL)autoUpperCaseToCamelCase {
+    return YES;
+}
+
++ (NSDictionary *)classReferenceDictForArray {
+    return nil;
+}
+
+//#pragma mark - single
+#pragma mark - Memory Cache To Accelerate
+
++ (NSArray *)globalKeysWithDict:(NSDictionary *)dict {
+    NSMutableDictionary *globalKeyDict = [NSMutableDictionary dictionary];
+    NSArray *dataDictKeys = [dict allKeys];
+    NSString *className = NSStringFromClass([self class]);
+    globalKeyDict[className] = dataDictKeys;
+    return globalKeyDict[className];
+
+//    static NSMutableDictionary *globalKeyDict = nil;
+//    @synchronized (self) {
+//        if (globalKeyDict == nil) {
+//            globalKeyDict = [NSMutableDictionary dictionary];
+//        }
+//    }
+//    NSString *className = NSStringFromClass([self class]);
+//    if (!globalKeyDict[className]) {
+//        NSArray *dataDictKeys = [dict allKeys];
+//        globalKeyDict[className] = dataDictKeys;
+//        return globalKeyDict[className];
+//    } else {
+//        return globalKeyDict[className];
+//    }
+}
+
++ (NSDictionary *)globalObjectPropertyTypes {
+    NSMutableDictionary *globalPropertyDict = [NSMutableDictionary dictionary];
+    NSString *className = NSStringFromClass([self class]);
+    globalPropertyDict[className] = [self propertysWithTypes];
+    return globalPropertyDict[className];
+        
+    /*
+    static NSMutableDictionary *globalPropertyDict = nil;
+    @synchronized (self) {
+        if (globalPropertyDict == nil) {
+            globalPropertyDict = [NSMutableDictionary dictionary];
+        }
+    }
+    NSString *className = NSStringFromClass([self class]);
+    if (!globalPropertyDict[className]) {
+        globalPropertyDict[className] = [self propertysWithTypes];
+        return globalPropertyDict[className];
+    } else {
+        return globalPropertyDict[className];
+    }
+    */
+}
+
++ (NSDictionary *)globalReferDict {
+    static NSMutableDictionary *globalReferDict = nil;
+    @synchronized (self) {
+        if (globalReferDict == nil) {
+            globalReferDict = [NSMutableDictionary dictionary];
+        }
+    }
+    NSString *className = NSStringFromClass([self class]);
+    if (!globalReferDict[className]) {
+        if ([self respondsToSelector:@selector(customReferenceDict)]) {
+            NSDictionary *referDict = [self customReferenceDict];
+            globalReferDict[className] = referDict;
+            return globalReferDict[className];
+        } else {
+            return nil;
+        }
+    } else {
+        return globalReferDict[className];
+    }
+}
+
+@end
+
+@implementation NSString (JsonReciprocity)
 
 + (NSString *)camelCaseFromUnderscoreCase:(NSString *)underscoreCase {
     if ([underscoreCase rangeOfString:@"_"].location == NSNotFound) {
@@ -366,84 +452,24 @@
     return camelCase;
 }
 
-#pragma mark - Override
-
-+ (BOOL)autoUpperCaseToCamelCase {
-    return YES;
-}
-
-+ (NSDictionary *)classReferenceDictForArray {
-    return nil;
-}
-
-//#pragma mark - single
-#pragma mark - Memory Cache To Accelerate
-
-+ (NSArray *)globalKeysWithDict:(NSDictionary *)dict {
-    NSMutableDictionary *globalKeyDict = [NSMutableDictionary dictionary];
-    NSArray *dataDictKeys = [dict allKeys];
-    NSString *className = NSStringFromClass([self class]);
-    globalKeyDict[className] = dataDictKeys;
-    return globalKeyDict[className];
-    
-    //    static NSMutableDictionary *globalKeyDict = nil;
-    //    @synchronized (self) {
-    //        if (globalKeyDict == nil) {
-    //            globalKeyDict = [NSMutableDictionary dictionary];
-    //        }
-    //    }
-    //    NSString *className = NSStringFromClass([self class]);
-    //    if (!globalKeyDict[className]) {
-    //        NSArray *dataDictKeys = [dict allKeys];
-    //        globalKeyDict[className] = dataDictKeys;
-    //        return globalKeyDict[className];
-    //    } else {
-    //        return globalKeyDict[className];
-    //    }
-}
-
-+ (NSDictionary *)globalObjectPropertyTypes {
-    NSMutableDictionary *globalPropertyDict = [NSMutableDictionary dictionary];
-    NSString *className = NSStringFromClass([self class]);
-    globalPropertyDict[className] = [self propertysWithTypes];
-    return globalPropertyDict[className];
-    
-    /*
-     static NSMutableDictionary *globalPropertyDict = nil;
-     @synchronized (self) {
-     if (globalPropertyDict == nil) {
-     globalPropertyDict = [NSMutableDictionary dictionary];
-     }
-     }
-     NSString *className = NSStringFromClass([self class]);
-     if (!globalPropertyDict[className]) {
-     globalPropertyDict[className] = [self propertysWithTypes];
-     return globalPropertyDict[className];
-     } else {
-     return globalPropertyDict[className];
-     }
-     */
-}
-
-+ (NSDictionary *)globalReferDict {
-    static NSMutableDictionary *globalReferDict = nil;
-    @synchronized (self) {
-        if (globalReferDict == nil) {
-            globalReferDict = [NSMutableDictionary dictionary];
-        }
++ (NSString *)underscoreCaseFromCamelCase:(NSString *)camelCase {
+    if (camelCase.length == 0) {
+        return camelCase;
     }
-    NSString *className = NSStringFromClass([self class]);
-    if (!globalReferDict[className]) {
-        if ([self respondsToSelector:@selector(customReferenceDict)]) {
-            NSDictionary *referDict = [self customReferenceDict];
-            globalReferDict[className] = referDict;
-            return globalReferDict[className];
+    NSMutableString *string = [NSMutableString string];
+    for (NSUInteger i = 0; i < camelCase.length; i++) {
+        unichar c = [camelCase characterAtIndex:i];
+        NSString *cString = [NSString stringWithFormat:@"%c", c];
+        NSString *cStringLower = [cString lowercaseString];
+        if ([cString isEqualToString:cStringLower]) {
+            [string appendString:cStringLower];
         } else {
-            return nil;
+            [string appendString:@"_"];
+            [string appendString:cStringLower];
         }
-    } else {
-        return globalReferDict[className];
     }
+    return string;
 }
 
 @end
+
