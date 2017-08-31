@@ -25,7 +25,6 @@
             NSString *type = [NSString stringWithUTF8String:ivar_getTypeEncoding(var)];
             NSString *name = [NSString stringWithUTF8String:ivar_getName(var)];
             if ([name hasPrefix:@"_"]) {
-                //                name = [name stringByReplacingOccurrencesOfString:@"_" withString:@""];
                 name = [name substringFromIndex:1];
             }
             if ([type hasPrefix:@"@"]) {
@@ -205,7 +204,6 @@
             }
         } else if ([self respondsToSelector:@selector(customFormat:value:)]) {
             id customValue = [self customFormat:propertyKey value:value];
-            //            NSLog(@"%@", @(!customValue));
             if (customValue) {
                 [object setValue:customValue forKey:propertyKey];
                 continue;
@@ -245,13 +243,6 @@
             }
             
             if ([property isKindOfClass:[NSNumber class]] || [property isKindOfClass:[NSDictionary class]]) { //数字类型和字典直接设值
-                
-                //                if ([property isKindOfClass:[NSDate class]]) {
-                //                    value = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
-                //                }
-                //                if ([property isKindOfClass:[NSURL class]]) {
-                //                    value = [NSURL URLWithString:value];
-                //                }
                 
                 [object setValue:value forKey:propertyKey];
                 
@@ -324,20 +315,6 @@
     return array;
 }
 
-//- (BOOL)isSupportedClasses {
-//    if ([self isKindOfClass:[NSString class]] || [self isKindOfClass:[NSNumber class]] //|| [self isKindOfClass:[NSDate class]] || [self isKindOfClass:[NSURL class]]
-//        ) {
-//        return YES;
-//    } else {
-//        return NO;
-//    }
-//}
-
-
-#pragma mark - Helper
-
-
-
 #pragma mark - Override
 
 + (BOOL)autoUpperCaseToCamelCase {
@@ -357,21 +334,6 @@
     NSString *className = NSStringFromClass([self class]);
     globalKeyDict[className] = dataDictKeys;
     return globalKeyDict[className];
-
-//    static NSMutableDictionary *globalKeyDict = nil;
-//    @synchronized (self) {
-//        if (globalKeyDict == nil) {
-//            globalKeyDict = [NSMutableDictionary dictionary];
-//        }
-//    }
-//    NSString *className = NSStringFromClass([self class]);
-//    if (!globalKeyDict[className]) {
-//        NSArray *dataDictKeys = [dict allKeys];
-//        globalKeyDict[className] = dataDictKeys;
-//        return globalKeyDict[className];
-//    } else {
-//        return globalKeyDict[className];
-//    }
 }
 
 + (NSDictionary *)globalObjectPropertyTypes {
@@ -379,22 +341,6 @@
     NSString *className = NSStringFromClass([self class]);
     globalPropertyDict[className] = [self propertysWithTypes];
     return globalPropertyDict[className];
-        
-    /*
-    static NSMutableDictionary *globalPropertyDict = nil;
-    @synchronized (self) {
-        if (globalPropertyDict == nil) {
-            globalPropertyDict = [NSMutableDictionary dictionary];
-        }
-    }
-    NSString *className = NSStringFromClass([self class]);
-    if (!globalPropertyDict[className]) {
-        globalPropertyDict[className] = [self propertysWithTypes];
-        return globalPropertyDict[className];
-    } else {
-        return globalPropertyDict[className];
-    }
-    */
 }
 
 + (NSDictionary *)globalReferDict {
